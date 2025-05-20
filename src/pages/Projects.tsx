@@ -19,10 +19,10 @@ const projects: Project[] = [
     github: "https://github.com/securedbyjc/SwiftEagle-AI",
   },
   {
-    title: "LexSentinel",
-    description: "Our internal Legal AI Assistant that automates compliance mapping, integrated risk assessments, and regulatory workflow tracking.",
+    title: "LexSentinel AI",
+    description: "A legal document analysis tool leveraging AI to extract, summarize, and classify sensitive legal content for compliance and risk management.",
     icon: FaRobot as ComponentType<any>,
-    github: "https://github.com/securedbyjc/lexsentinel-ai",
+    github: "https://github.com/securedbyjc/LexSentinel-AI",
   },
   {
     title: "Compliance Monitoring Dashboard",
@@ -63,6 +63,22 @@ const Projects: React.FC = () => (
               <Text color="yellow.100" fontSize="md" textAlign="center" mb={2}>
                 {description}
               </Text>
+              {title === "LexSentinel AI" && (
+              <Link
+                href="https://forms.gle/FiromRZ4MPR2bBFUA"
+                isExternal
+                color="red.700"
+                fontWeight="semibold"
+                textDecoration="underline"
+                mt={2}
+                display="block"
+              >
+                Request Access
+              </Link>
+            )}
+            <Text fontSize="sm" color="yellow.200" mt="auto" opacity={0.85}>
+              View on GitHub &rarr;
+            </Text>
               <Text fontSize="sm" color="yellow.200" mt="auto" opacity={0.95} fontWeight="bold">
                 Coming Soon
               </Text>
@@ -84,19 +100,7 @@ const Projects: React.FC = () => (
               role="group"
               aria-label={`View ${title} on GitHub`}
             >
-              <Box
-                bg="gray.800"
-                p={8}
-                borderRadius="lg"
-                boxShadow="xl"
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                minH="340px"
-                height="100%"
-                transition="all 0.18s cubic-bezier(.4,0,.2,1)"
-                _groupHover={{ bg: "gray.700" }}
-              >
+              <Box bg="gray.800" borderRadius="lg" boxShadow="xl" display="flex" flexDirection="column" alignItems="center" minH="340px" height="100%" transition="all 0.18s cubic-bezier(.4,0,.2,1)" _groupHover={{ bg: "gray.700" }}>
                 <Icon as={icon} boxSize={12} color="yellow.400" mb={4} />
                 <Heading as="h3" size="md" mb={3} mt={2} color="yellow.300" textAlign="center">
                   {title}
@@ -104,10 +108,20 @@ const Projects: React.FC = () => (
                 <Text color="yellow.100" fontSize="md" textAlign="center" mb={2}>
                   {description}
                 </Text>
+                {title === "LexSentinel AI" && (
+                  <Link
+                    href="/projects/lexsentinel-access"
+                    className="text-red-700 underline font-semibold"
+                    style={{ display: "block", marginTop: "0.5rem" }}
+                  >
+                    Request Access
+                  </Link>
+                )}
                 <Text fontSize="sm" color="yellow.200" mt="auto" opacity={0.85}>
                   View on GitHub &rarr;
                 </Text>
               </Box>
+
             </Link>
           )
         )}
