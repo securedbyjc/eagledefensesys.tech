@@ -25,7 +25,6 @@ Visit: [eagledefensesys.tech](https://eagledefensesys.tech)
 - **React + TypeScript**
 - **Chakra UI** for responsive design
 - **Vite** (or Create React App, specify which)
-- **Tailwind CSS** (if included)
 - **Basin** (for secure contact form handling)
 - **Deployed:** [Your platform, e.g. Vercel, Netlify, etc.]
 
