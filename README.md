@@ -1,46 +1,68 @@
-# Getting Started with Create React App
+# Eagle Defense Systems, LLC
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![EDS Logo](public/assets/logo-eds-black.png)
 
-## Available Scripts
+**Veteran-Owned | Cybersecurity, Compliance, & Cloud Security Solutions**
 
-In the project directory, you can run:
+https://eagledefensesys.tech
 
-### `npm start`
+---
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 🚀 About
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Eagle Defense Systems, LLC is a veteran-owned cybersecurity consultancy and technology builder. We help government contractors, agencies, and commercial organizations achieve and maintain compliance through secure, scalable, and AI-driven solutions.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🖥️ Live Site
 
-### `npm run build`
+Visit: [eagledefensesys.tech](https://eagledefensesys.tech)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠️ Technology Stack
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **React + TypeScript**
+- **Chakra UI** for responsive design
+- **Vite** (or Create React App, specify which)
+- **Tailwind CSS** (if included)
+- **Basin** (for secure contact form handling)
+- **Deployed:** [Your platform, e.g. Vercel, Netlify, etc.]
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 📦 Project Structure
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- `src/`
+  - `components/` — Reusable UI elements
+  - `pages/` — Main site pages (About, Capabilities, Projects, Contact)
+  - `assets/` — Images, logos, video backgrounds, and PDFs
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+---
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## ✨ Features
 
-## Learn More
+- **Modern UI** — Built with Chakra UI for instant responsiveness and accessibility.
+- **Technology Portfolio** — Showcases EDS’s core security and compliance tools.
+- **Contact & Demo Forms** — Secure, spam-protected contact forms (via Basin).
+- **Downloadable Capability Statement** — One-click PDF view/download.
+- **Mobile-First** — Clean and functional across all device sizes.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+---
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📚 How to Run Locally
+
+```bash
+git clone https://github.com/securedbyjc/eagledefensesys.tech.git
+cd eagledefensesys.tech/webapp
+npm install
+npm run dev     # or 'yarn start' if using yarn
+
+📝 License
+MIT License (edit as appropriate for your project).
+
+🤝 Contact
+For business or collaboration inquiries, use our Contact Page
+or email: jcollins@eagledefensesys.tech
+
+Built with pride by Eagle Defense Systems, LLC
