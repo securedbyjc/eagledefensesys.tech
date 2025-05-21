@@ -1,7 +1,7 @@
 // src/pages/Projects.tsx
 import React, { ComponentType } from "react";
 import { Box, Container, Heading, SimpleGrid, Stack, Text, Icon, Link } from "@chakra-ui/react";
-import { FaLock, FaRobot, FaCogs } from "react-icons/fa";
+import { FaCogs, FaChartLine, FaGavel } from "react-icons/fa";
 
 type Project = {
   title: string;
@@ -9,27 +9,31 @@ type Project = {
   icon: ComponentType<any>;
   github?: string;
   comingSoon?: boolean;
+  accessLink?: string;
 };
 
 const projects: Project[] = [
   {
-    title: "SwiftEagle AI",
-    description: "A UEBA-based behavioral analytics engine designed to detect insider threats, automate risk scoring, and proactively defend against advanced threats.",
-    icon: FaLock as ComponentType<any>,
+    title: "SwiftEagle-AI",
+    description: "UEBA-based behavioral analytics and compliance insights.",
+    icon: FaChartLine as ComponentType<any>,
     github: "https://github.com/securedbyjc/SwiftEagle-AI",
+    accessLink: "/projects/swifteagle-access",
   },
   {
     title: "LexSentinel AI",
-    description: "A legal document analysis tool leveraging AI to extract, summarize, and classify sensitive legal content for compliance and risk management.",
-    icon: FaRobot as ComponentType<any>,
-    github: "https://github.com/securedbyjc/LexSentinel-AI",
+    description: "Your legal AI assistant for compliance automation.",
+    icon: FaGavel as ComponentType<any>,
+    github: "https://github.com/securedbyjc/lexsentinel-ai",
+    accessLink: "/projects/lexsentinel-access",
   },
   {
     title: "Compliance Monitoring Dashboard",
-    description: "A unified dashboard that tracks real-time GRC metrics, alerts on policy drift, and provides audit-ready reporting for CMMC, NIST, and FedRAMP.",
+    description:
+      "A unified dashboard that tracks real-time GRC metrics, alerts on policy drift, and provides audit-ready reporting for CMMC, NIST, and FedRAMP.",
     icon: FaCogs as ComponentType<any>,
     comingSoon: true,
-  }
+  },
 ];
 
 const Projects: React.FC = () => (
@@ -39,7 +43,7 @@ const Projects: React.FC = () => (
         Our Technology Projects
       </Heading>
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={12}>
-        {projects.map(({ title, description, icon, github, comingSoon }, idx) =>
+        {projects.map(({ title, description, icon, github, comingSoon, accessLink }, idx) =>
           comingSoon ? (
             <Box
               key={idx}
@@ -64,21 +68,21 @@ const Projects: React.FC = () => (
                 {description}
               </Text>
               {title === "LexSentinel AI" && (
-              <Link
-                href="https://forms.gle/FiromRZ4MPR2bBFUA"
-                isExternal
-                color="red.700"
-                fontWeight="semibold"
-                textDecoration="underline"
-                mt={2}
-                display="block"
-              >
-                Request Access
-              </Link>
-            )}
-            <Text fontSize="sm" color="yellow.200" mt="auto" opacity={0.85}>
-              View on GitHub &rarr;
-            </Text>
+                <Link
+                  href="https://forms.gle/FiromRZ4MPR2bBFUA"
+                  isExternal
+                  color="red.700"
+                  fontWeight="semibold"
+                  textDecoration="underline"
+                  mt={2}
+                  display="block"
+                >
+                  Request Access
+                </Link>
+              )}
+              <Text fontSize="sm" color="yellow.200" mt="auto" opacity={0.85}>
+                View on GitHub &rarr;
+              </Text>
               <Text fontSize="sm" color="yellow.200" mt="auto" opacity={0.95} fontWeight="bold">
                 Coming Soon
               </Text>
@@ -100,7 +104,18 @@ const Projects: React.FC = () => (
               role="group"
               aria-label={`View ${title} on GitHub`}
             >
-              <Box bg="gray.800" borderRadius="lg" boxShadow="xl" display="flex" flexDirection="column" alignItems="center" minH="340px" height="100%" transition="all 0.18s cubic-bezier(.4,0,.2,1)" _groupHover={{ bg: "gray.700" }}>
+              <Box
+                bg="gray.800"
+                borderRadius="lg"
+                boxShadow="xl"
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
+                minH="340px"
+                height="100%"
+                transition="all 0.18s cubic-bezier(.4,0,.2,1)"
+                _groupHover={{ bg: "gray.700" }}
+              >
                 <Icon as={icon} boxSize={12} color="yellow.400" mb={4} />
                 <Heading as="h3" size="md" mb={3} mt={2} color="yellow.300" textAlign="center">
                   {title}
@@ -121,7 +136,6 @@ const Projects: React.FC = () => (
                   View on GitHub &rarr;
                 </Text>
               </Box>
-
             </Link>
           )
         )}

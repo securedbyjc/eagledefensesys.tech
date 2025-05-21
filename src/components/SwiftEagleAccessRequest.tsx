@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Heading, Text, Link, useColorModeValue } from "@chakra-ui/react";
 
-const LexSentinelAccessRequest: React.FC = () => {
+const SwiftEagleAccessRequest: React.FC = () => {
   const cardBg = useColorModeValue("whiteAlpha.900", "gray.800");
 
   return (
@@ -15,20 +15,22 @@ const LexSentinelAccessRequest: React.FC = () => {
       mt={12}
     >
       <Heading as="h1" size="xl" textAlign="center" mb={2} color="red.700">
-        LexSentinel AI Access Request
+        SwiftEagle-AI Access Request
       </Heading>
       <Text textAlign="center" color="gray.700" mb={6}>
-        Please complete the form below to request access to LexSentinel AI.<br />
+        Please complete the form below to request access to SwiftEagle-AI.<br />
         Your request will be reviewed and you will be contacted by email.
       </Text>
-      <Box as="iframe"
-        src="https://docs.google.com/forms/d/e/1FAIpQLSeCoNOdEV-mQZwktQbkalL686I-Kx5COvC5_uMeWGQir4LsGQ/viewform?embedded=true"
+      <Box
+        as="iframe"
+        src="https://docs.google.com/forms/d/e/1FAIpQLSdoRFbl_wwXyuUB3FIyrhVf8JGaegB1ugYDoxVc0ptJL9rCCA/viewform?embedded=true"
         width="100%"
         height="1274px"
         border="none"
         bg="transparent"
-        title="LexSentinel AI Access Request"
+        title="SwiftEagle-AI Access Request"
         rounded="xl"
+        mb={2}
       />
       <Text mt={6} color="gray.500" fontSize="sm" textAlign="center">
         For urgent or special requests, contact{" "}
@@ -46,4 +48,4 @@ const LexSentinelAccessRequest: React.FC = () => {
   );
 };
 
-export default LexSentinelAccessRequest;
+export default SwiftEagleAccessRequest;

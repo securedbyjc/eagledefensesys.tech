@@ -42,6 +42,8 @@ export default function Hero() {
         h="100%"
         bg="blackAlpha.700"
         zIndex={1}
+        // Uncomment the next line for a blur effect (browser support required)
+        // style={{ backdropFilter: 'blur(2px)' }}
       />
 
       {/* Hero Content */}
@@ -87,7 +89,6 @@ export default function Hero() {
           >
             Learn More
           </Button>
-
         </Stack>
       </Stack>
     </Box>
