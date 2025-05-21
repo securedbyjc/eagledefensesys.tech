@@ -14,15 +14,17 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: "SwiftEagle-AI",
-    description: "UEBA-based behavioral analytics and compliance insights.",
+    title: "SwiftEagle AI",
+    description:
+      "A UEBA-based behavioral analytics engine designed to detect insider threats, automate risk scoring, and proactively defend against advanced threats.",
     icon: FaChartLine as ComponentType<any>,
     github: "https://github.com/securedbyjc/SwiftEagle-AI",
     accessLink: "/projects/swifteagle-access",
   },
   {
     title: "LexSentinel AI",
-    description: "Your legal AI assistant for compliance automation.",
+    description:
+      "A legal document analysis tool leveraging AI to extract, summarize, and classify sensitive legal content for compliance and risk management.",
     icon: FaGavel as ComponentType<any>,
     github: "https://github.com/securedbyjc/lexsentinel-ai",
     accessLink: "/projects/lexsentinel-access",
@@ -43,69 +45,13 @@ const Projects: React.FC = () => (
         Our Technology Projects
       </Heading>
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={12}>
-        {projects.map(({ title, description, icon, github, comingSoon, accessLink }, idx) =>
-          comingSoon ? (
-            <Box
-              key={idx}
-              bg="gray.700"
-              p={8}
-              borderRadius="lg"
-              boxShadow="xl"
-              display="flex"
-              flexDirection="column"
-              alignItems="center"
-              minH="340px"
-              height="100%"
-              opacity={1}
-              cursor="not-allowed"
-              position="relative"
-            >
-              <Icon as={icon} boxSize={12} color="yellow.400" mb={4} />
-              <Heading as="h3" size="md" mb={3} mt={2} color="yellow.300" textAlign="center">
-                {title}
-              </Heading>
-              <Text color="yellow.100" fontSize="md" textAlign="center" mb={2}>
-                {description}
-              </Text>
-              {title === "LexSentinel AI" && (
-                <Link
-                  href="https://forms.gle/FiromRZ4MPR2bBFUA"
-                  isExternal
-                  color="red.700"
-                  fontWeight="semibold"
-                  textDecoration="underline"
-                  mt={2}
-                  display="block"
-                >
-                  Request Access
-                </Link>
-              )}
-              <Text fontSize="sm" color="yellow.200" mt="auto" opacity={0.85}>
-                View on GitHub &rarr;
-              </Text>
-              <Text fontSize="sm" color="yellow.200" mt="auto" opacity={0.95} fontWeight="bold">
-                Coming Soon
-              </Text>
-            </Box>
-          ) : (
-            <Link
-              key={idx}
-              href={github}
-              isExternal
-              _hover={{
-                textDecoration: "none",
-                transform: "scale(1.04)",
-                boxShadow: "2xl",
-                bg: "yellow.900Alpha",
-              }}
-              borderRadius="lg"
-              transition="all 0.18s cubic-bezier(.4,0,.2,1)"
-              display="block"
-              role="group"
-              aria-label={`View ${title} on GitHub`}
-            >
+        {projects.map(
+          ({ title, description, icon, github, comingSoon, accessLink }, idx) =>
+            comingSoon ? (
               <Box
-                bg="gray.800"
+                key={idx}
+                bg="gray.700"
+                p={8}
                 borderRadius="lg"
                 boxShadow="xl"
                 display="flex"
@@ -113,31 +59,113 @@ const Projects: React.FC = () => (
                 alignItems="center"
                 minH="340px"
                 height="100%"
-                transition="all 0.18s cubic-bezier(.4,0,.2,1)"
-                _groupHover={{ bg: "gray.700" }}
+                opacity={1}
+                cursor="not-allowed"
+                position="relative"
               >
                 <Icon as={icon} boxSize={12} color="yellow.400" mb={4} />
-                <Heading as="h3" size="md" mb={3} mt={2} color="yellow.300" textAlign="center">
+                <Heading
+                  as="h3"
+                  size="md"
+                  mb={3}
+                  mt={2}
+                  color="yellow.300"
+                  textAlign="center"
+                >
                   {title}
                 </Heading>
                 <Text color="yellow.100" fontSize="md" textAlign="center" mb={2}>
                   {description}
                 </Text>
-                {title === "LexSentinel AI" && (
+               {(title === "SwiftEagle AI" || title === "LexSentinel AI") && accessLink && (
                   <Link
-                    href="/projects/lexsentinel-access"
-                    className="text-red-700 underline font-semibold"
-                    style={{ display: "block", marginTop: "0.5rem" }}
+                    href={accessLink}
+                    color="red.700"
+                    fontWeight="semibold"
+                    textDecoration="underline"
+                    mt={2}
+                    display="block"
+                    isExternal={accessLink.startsWith('http')}
                   >
                     Request Access
                   </Link>
                 )}
+
                 <Text fontSize="sm" color="yellow.200" mt="auto" opacity={0.85}>
                   View on GitHub &rarr;
                 </Text>
+                <Text
+                  fontSize="sm"
+                  color="yellow.200"
+                  mt="auto"
+                  opacity={0.95}
+                  fontWeight="bold"
+                >
+                  Coming Soon
+                </Text>
               </Box>
-            </Link>
-          )
+            ) : (
+              <Link
+                key={idx}
+                href={github}
+                isExternal
+                _hover={{
+                  textDecoration: "none",
+                  transform: "scale(1.04)",
+                  boxShadow: "2xl",
+                  bg: "yellow.900Alpha",
+                }}
+                borderRadius="lg"
+                transition="all 0.18s cubic-bezier(.4,0,.2,1)"
+                display="block"
+                role="group"
+                aria-label={`View ${title} on GitHub`}
+              >
+                <Box
+                  bg="gray.800"
+                  borderRadius="lg"
+                  boxShadow="xl"
+                  display="flex"
+                  flexDirection="column"
+                  alignItems="center"
+                  minH="340px"
+                  height="100%"
+                  transition="all 0.18s cubic-bezier(.4,0,.2,1)"
+                  _groupHover={{ bg: "gray.700" }}
+                >
+                  <Icon as={icon} boxSize={12} color="yellow.400" mb={4} />
+                  <Heading
+                    as="h3"
+                    size="md"
+                    mb={3}
+                    mt={2}
+                    color="yellow.300"
+                    textAlign="center"
+                  >
+                    {title}
+                  </Heading>
+                  <Text color="yellow.100" fontSize="md" textAlign="center" mb={2}>
+                    {description}
+                  </Text>
+                  {(title === "LexSentinel AI" || title === "SwiftEagle AI") && (
+                    <Link
+                      href={accessLink}
+                      color="red.700"
+                      fontWeight="semibold"
+                      textDecoration="underline"
+                      mt={2}
+                      display="block"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Request Access
+                    </Link>
+                  )}
+                  <Text fontSize="sm" color="yellow.200" mt="auto" opacity={0.85}>
+                    View on GitHub &rarr;
+                  </Text>
+                </Box>
+              </Link>
+            )
         )}
       </SimpleGrid>
       <Stack mt={12} align="center">

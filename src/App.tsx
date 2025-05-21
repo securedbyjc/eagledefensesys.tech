@@ -1,6 +1,7 @@
 // src/App.tsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import ExploreProjectsCTA from './components/ExploreProjectsCTA';
@@ -12,9 +13,9 @@ import Footer from './components/Footer';
 import LexSentinelAccessRequest from "./components/LexSentinelAccessRequest";
 import SwiftEagleAccessRequest from "./components/SwiftEagleAccessRequest";
 
-
-function App() {
+const App: React.FC = () => {
   return (
+    <ChakraProvider>
       <Router>
         <Header />
         <Routes>
@@ -37,7 +38,8 @@ function App() {
         </Routes>
         <Footer />
       </Router>
+    </ChakraProvider>
   );
-}
+};
 
 export default App;

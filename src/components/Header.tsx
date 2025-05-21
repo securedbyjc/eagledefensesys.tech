@@ -23,14 +23,12 @@ const Header = () => {
   return (
     <Box bg={bg} color={color} py={4} px={6} boxShadow="md" as="header">
       <Flex align="center" justify="space-between">
-        {/* Logo and Brand */}
         <Flex as={RouterLink} to="/" align="center" gap={3} _hover={{ textDecoration: "none" }}>
           <Image src="/assets/logo-eds-black.png" alt="EDS Logo" boxSize="50px" />
           <Heading size="md" color={color} letterSpacing="wider">
             Eagle Defense Systems
           </Heading>
         </Flex>
-        {/* Hamburger (mobile only) */}
         <IconButton
           aria-label={isOpen ? "Close menu" : "Open menu"}
           icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -39,7 +37,6 @@ const Header = () => {
           variant="ghost"
           color={color}
         />
-        {/* Desktop nav */}
         <Flex
           display={{ base: "none", md: "flex" }}
           direction="row"
@@ -61,27 +58,31 @@ const Header = () => {
         </Flex>
       </Flex>
       {/* Mobile nav (collapse) */}
-      <Collapse in={isOpen} animateOpacity>
-        <Flex
-          direction="column"
-          gap={4}
-          mt={4}
-          display={{ md: "none" }}
-        >
-          <Button as={RouterLink} to="/about" variant="link" colorScheme="yellow" w="100%">
-            About
-          </Button>
-          <Button as={RouterLink} to="/capabilities" variant="link" colorScheme="yellow" w="100%">
-            Capabilities
-          </Button>
-          <Button as={RouterLink} to="/projects" variant="link" colorScheme="yellow" w="100%">
-            Projects
-          </Button>
-          <Button as={RouterLink} to="/contact" variant="link" colorScheme="yellow" w="100%">
-            Contact
-          </Button>
-        </Flex>
-      </Collapse>
+      <Collapse
+        in={isOpen}
+        animateOpacity
+        children={
+          <Flex
+            direction="column"
+            gap={4}
+            mt={4}
+            display={{ md: "none" }}
+          >
+            <Button as={RouterLink} to="/about" variant="link" colorScheme="yellow" w="100%">
+              About
+            </Button>
+            <Button as={RouterLink} to="/capabilities" variant="link" colorScheme="yellow" w="100%">
+              Capabilities
+            </Button>
+            <Button as={RouterLink} to="/projects" variant="link" colorScheme="yellow" w="100%">
+              Projects
+            </Button>
+            <Button as={RouterLink} to="/contact" variant="link" colorScheme="yellow" w="100%">
+              Contact
+            </Button>
+          </Flex>
+        }
+      />
     </Box>
   );
 };

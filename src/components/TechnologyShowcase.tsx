@@ -7,8 +7,10 @@ import {
   Stack,
   Text,
   Icon,
+  Button,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 import { FaLock, FaRobot, FaCogs } from "react-icons/fa";
 
 const iconProps = {
@@ -48,7 +50,7 @@ const TechnologyShowcase: React.FC = () => {
               Architected from day one to meet CMMC, NIST 800-53, and FedRAMP controls—no bolt-on fixes required.
             </Text>
           </Stack>
-          {/* Card 2 */}
+          {/* Card 2 with Request Access Button */}
           <Stack
             align="center"
             textAlign="center"
@@ -64,6 +66,19 @@ const TechnologyShowcase: React.FC = () => {
             <Text fontSize="sm" color={cardText}>
               Our internal platforms use AI to detect misconfigurations, map control gaps, and accelerate audit prep.
             </Text>
+            <Button
+              as={RouterLink}
+              to="/projects/swifteagle-access"
+              colorScheme="yellow"
+              variant="solid"
+              mt={4}
+              fontWeight="bold"
+              size="sm"
+              px={6}
+              width="100%"
+            >
+              Request Access to SwiftEagle-AI
+            </Button>
           </Stack>
           {/* Card 3 */}
           <Stack

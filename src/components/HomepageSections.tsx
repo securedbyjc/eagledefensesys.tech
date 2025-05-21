@@ -10,15 +10,14 @@ import {
   ListItem,
   ListIcon,
   Button,
-  useColorModeValue
 } from '@chakra-ui/react';
 import { CheckCircleIcon } from '@chakra-ui/icons';
 
 const HomepageSections = () => {
-  // Chakra color mode aware backgrounds (optional)
-  const aboutBg = useColorModeValue("gray.50", "gray.900");
-  const capabilitiesBg = useColorModeValue("white", "gray.800");
-  const contactBg = useColorModeValue("gray.100", "gray.700");
+  // Static colors (no useColorModeValue)
+  const aboutBg = "gray.50";
+  const capabilitiesBg = "white";
+  const contactBg = "gray.100";
 
   return (
     <Box as="main">
