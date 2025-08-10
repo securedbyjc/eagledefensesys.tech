@@ -1,6 +1,6 @@
 // src/components/CallToAction.tsx
-import { Box, Button, Heading, Stack, Text, useColorModeValue } from '@chakra-ui/react';
-import React from 'react';
+import React from "react";
+import { Box, Button, Heading, Stack, Text, useColorModeValue } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
 const CallToAction = () => {
@@ -15,7 +15,7 @@ const CallToAction = () => {
       <Text fontSize={{ base: "md", md: "lg" }} mb={6}>
         Let’s walk you through how Eagle Defense Systems can help.
       </Text>
-      <Stack direction={{ base: 'column', sm: 'row' }} spacing={4} justify="center">
+      <Stack direction={{ base: "column", sm: "row" }} spacing={4} justify="center">
         <Button
           as={RouterLink}
           to="/contact"

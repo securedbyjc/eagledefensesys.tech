@@ -1,5 +1,4 @@
-// src/pages/Contact.tsx
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import {
   Box,
   Heading,
@@ -7,32 +6,31 @@ import {
   Textarea,
   Button,
   Stack,
-  FormLabel,
   useToast,
+  FormLabel,
 } from "@chakra-ui/react";
 
-const FORM_ENDPOINT = "https://usebasin.com/f/56372b24f7a3"; // Update with your actual basin freeform endpoint
+const FORM_ENDPOINT = "https://usebasin.com/f/56372b24f7a3"; // Replace with your real endpoint
 
 const Contact = () => {
   const [submitting, setSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
   const toast = useToast();
 
-   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
-    fetch(FORM_ENDPOINT, {
-      method: "POST",
-      body: formData,
-      headers: {
-        Accept: "application/json",
-      },
-    })
-      .then((response) => {
-        setSubmitting(false);
-        setSuccess(true);
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
         toast({
           title: "Message sent!",
           description: "Thank you for reaching out. We'll respond as soon as possible.",
@@ -41,20 +39,32 @@ const Contact = () => {
           isClosable: true,
         });
         e.currentTarget.reset();
-      })
-      .catch(() => {
-        setSubmitting(false);
-        toast({
-          title: "Something went wrong.",
-          description: "Please try again later or email us directly.",
-          status: "error",
-          duration: 7000,
-          isClosable: true,
-        });
+      } else {
+        throw new Error("Form submission failed");
+      }
+    } catch (error) {
+      toast({
+        title: "Something went wrong.",
+        description: "Please try again later or email us directly.",
+        status: "error",
+        duration: 7000,
+        isClosable: true,
       });
+    } finally {
+      setSubmitting(false);
+    }
   };
+
   return (
-    <Box maxW="md" mx="auto" mt={12} p={8} bg="white" borderRadius="xl" boxShadow="md">
+    <Box
+      maxW="md"
+      mx="auto"
+      mt={12}
+      p={8}
+      bg="white"
+      borderRadius="xl"
+      boxShadow="md"
+    >
       <Heading as="h1" size="lg" mb={6} color="yellow.600" textAlign="center">
         Contact Us
       </Heading>
@@ -85,4 +95,5 @@ const Contact = () => {
     </Box>
   );
 };
-export default Contact; 
+
+export default Contact;

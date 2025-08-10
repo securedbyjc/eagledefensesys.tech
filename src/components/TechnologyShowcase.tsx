@@ -1,14 +1,13 @@
-// src/components/TechnologyShowcase.tsx
 import React, { ElementType } from "react";
+import { useColorModeValue } from "@chakra-ui/react";
 import {
   Box,
   Container,
   Heading,
   Stack,
   Text,
-  Icon,
   Button,
-  useColorModeValue,
+  Icon,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { FaLock, FaRobot, FaCogs } from "react-icons/fa";
@@ -19,7 +18,7 @@ const iconProps = {
   mb: 4,
 };
 
-const cardBg = "gray.800"; // Optional: add a card bg for better contrast in light mode
+const cardBg = "gray.800";
 
 const TechnologyShowcase: React.FC = () => {
   const sectionBg = useColorModeValue("gray.900", "gray.900");
@@ -50,7 +49,8 @@ const TechnologyShowcase: React.FC = () => {
               Architected from day one to meet CMMC, NIST 800-53, and FedRAMP controls—no bolt-on fixes required.
             </Text>
           </Stack>
-          {/* Card 2 with Request Access Button */}
+
+          {/* Card 2 */}
           <Stack
             align="center"
             textAlign="center"
@@ -80,6 +80,7 @@ const TechnologyShowcase: React.FC = () => {
               Request Access to SwiftEagle-AI
             </Button>
           </Stack>
+
           {/* Card 3 */}
           <Stack
             align="center"
@@ -104,3 +105,4 @@ const TechnologyShowcase: React.FC = () => {
 };
 
 export default TechnologyShowcase;
+

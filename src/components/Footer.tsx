@@ -1,6 +1,14 @@
 // src/components/Footer.tsx
 import React from "react";
-import { Box, Container, Text, Stack, Link, HStack, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Container,
+  Text,
+  Stack,
+  Link,
+  HStack,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
 const Footer = () => {
@@ -21,18 +29,22 @@ const Footer = () => {
             © {new Date().getFullYear()} Eagle Defense Systems LLC. All rights reserved.
           </Text>
           <HStack spacing={6}>
-            <Link as={RouterLink} to="/about" _hover={{ color: hoverColor }}>
-              About
-            </Link>
-            <Link as={RouterLink} to="/capabilities" _hover={{ color: hoverColor }}>
-              Capabilities
-            </Link>
-            <Link as={RouterLink} to="/projects" _hover={{ color: hoverColor }}>
-              Projects
-            </Link>
-            <Link as={RouterLink} to="/contact" _hover={{ color: hoverColor }}>
-              Contact
-            </Link>
+            {[
+              { label: "About", path: "/about" },
+              { label: "Capabilities", path: "/capabilities" },
+              { label: "Projects", path: "/projects" },
+              { label: "Contact", path: "/contact" },
+            ].map(({ label, path }) => (
+              <Link
+                key={label}
+                as={RouterLink}
+                to={path}
+                fontSize="sm"
+                _hover={{ color: hoverColor }}
+              >
+                {label}
+              </Link>
+            ))}
           </HStack>
         </Stack>
       </Container>

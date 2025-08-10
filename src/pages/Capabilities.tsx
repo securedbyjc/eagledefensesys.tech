@@ -1,5 +1,3 @@
-// src/pages/Capabilities.tsx
-
 import React from "react";
 import {
   Box,
@@ -7,14 +5,13 @@ import {
   Text,
   Stack,
   Container,
-  Divider,
   SimpleGrid,
   List,
   ListItem,
   Button,
   useColorModeValue,
+  Divider,
 } from "@chakra-ui/react";
-
 
 const services = [
   "Cybersecurity Program Design & Implementation",
@@ -62,120 +59,91 @@ const certifications = [
   "Frontend Web Development Certification – The Tech Academy",
 ];
 
-const Capabilities = () => (
-  <Box bg={useColorModeValue("gray.50", "gray.800")} minH="100vh" py={{ base: 8, md: 16 }}>
-    <Container maxW="5xl">
-      <Stack spacing={10} align="center">
-        <Heading as="h1" size="2xl" color="yellow.500" fontWeight="bold" textAlign="center">
-          Eagle Defense Systems LLC
-        </Heading>
-        <Text fontSize="lg" color="gray.700" textAlign="center">
-          Veteran-Owned | Cybersecurity, Compliance, & Cloud Security Solutions
-        </Text>
-        <Divider />
+const Capabilities = () => {
+  const bgColor = useColorModeValue("gray.50", "gray.800");
+  const cardColor = useColorModeValue("white", "gray.700");
+  const headingColor = useColorModeValue("yellow.600", "yellow.400");
+  const textColor = useColorModeValue("gray.700", "gray.200");
 
-    
-        {/* Download/View Capability Statement Buttons */}
-        <Stack align="center" mt={0} mb={8}>
-        <Button
-            colorScheme="yellow"
-            as="a"
-            href="/assets/EDS-Capabilities-Statement.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            size="lg"
-            mb={2}
-        >
-            View Capability Statement (PDF)
-        </Button>
-        <Button
-            colorScheme="yellow"
-            variant="outline"
-            as="a"
-            href="/assets/EDS-Capabilities-Statement.pdf"
-            download
-            size="md"
-        >
-            Download PDF
-        </Button>
+  const renderList = (items: string[]) => (
+    <List spacing={2}>{items.map((item, i) => <ListItem key={i}>• {item}</ListItem>)}</List>
+  );
+
+  return (
+    <Box bg={bgColor} minH="100vh" py={{ base: 8, md: 16 }}>
+      <Container maxW="6xl">
+        <Stack spacing={10} align="center">
+          <Stack textAlign="center">
+            <Heading as="h1" size="2xl" color="yellow.500" fontWeight="bold">
+              Eagle Defense Systems LLC
+            </Heading>
+            <Text fontSize="lg" color={textColor}>
+              Veteran-Owned | Cybersecurity, Compliance, & Cloud Security Solutions
+            </Text>
+          </Stack>
+
+          <Divider />
+
+          <Stack align="center" spacing={3}>
+            <Button
+              colorScheme="yellow"
+              as="a"
+              href="/assets/EDS-Capabilities-Statement.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              size="lg"
+            >
+              View Capability Statement (PDF)
+            </Button>
+            <Button
+              colorScheme="yellow"
+              variant="outline"
+              as="a"
+              href="/assets/EDS-Capabilities-Statement.pdf"
+              download
+              size="md"
+            >
+              Download PDF
+            </Button>
+          </Stack>
+
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8} w="100%">
+            <Box bg={cardColor} borderRadius="xl" boxShadow="md" p={6}>
+              <Heading size="lg" color={headingColor} mb={2}>Our Services</Heading>
+              {renderList(services)}
+            </Box>
+
+            <Box bg={cardColor} borderRadius="xl" boxShadow="md" p={6}>
+              <Heading size="lg" color={headingColor} mb={2}>Core Competencies</Heading>
+              {renderList(competencies)}
+            </Box>
+          </SimpleGrid>
+
+          <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8} w="100%">
+            <Box bg={cardColor} borderRadius="xl" boxShadow="md" p={6}>
+              <Heading size="lg" color={headingColor} mb={2}>Differentiators</Heading>
+              {renderList(differentiators)}
+            </Box>
+
+            <Box bg={cardColor} borderRadius="xl" boxShadow="md" p={6}>
+              <Heading size="lg" color={headingColor} mb={2}>NAICS Codes</Heading>
+              {renderList(naics)}
+            </Box>
+          </SimpleGrid>
+
+          <Box bg={cardColor} borderRadius="xl" boxShadow="md" p={6} w="100%" maxW="3xl">
+            <Heading size="lg" color={headingColor} mb={2}>Certifications & Licenses</Heading>
+            {renderList(certifications)}
+          </Box>
+
+          <Box textAlign="center" w="100%">
+            <Heading as="h2" size="md" color={headingColor} mb={2}>Past Performance</Heading>
+            <Text color={textColor}>Available Upon Request</Text>
+          </Box>
         </Stack>
-
-
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8} w="100%">
-          {/* Services */}
-          <Box bg="white" borderRadius="xl" boxShadow="md" p={6}>
-            <Heading as="h2" size="lg" color="yellow.600" mb={2}>
-              Our Services
-            </Heading>
-            <List spacing={2}>
-              {services.map((service, i) => (
-                <ListItem key={i}>• {service}</ListItem>
-              ))}
-            </List>
-          </Box>
-
-          {/* Core Competencies */}
-          <Box bg="white" borderRadius="xl" boxShadow="md" p={6}>
-            <Heading as="h2" size="lg" color="yellow.600" mb={2}>
-              Core Competencies
-            </Heading>
-            <List spacing={2}>
-              {competencies.map((comp, i) => (
-                <ListItem key={i}>• {comp}</ListItem>
-              ))}
-            </List>
-          </Box>
-        </SimpleGrid>
-
-        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8} w="100%">
-          {/* Differentiators */}
-          <Box bg="white" borderRadius="xl" boxShadow="md" p={6}>
-            <Heading as="h2" size="lg" color="yellow.600" mb={2}>
-              Differentiators
-            </Heading>
-            <List spacing={2}>
-              {differentiators.map((item, i) => (
-                <ListItem key={i}>• {item}</ListItem>
-              ))}
-            </List>
-          </Box>
-
-          {/* NAICS Codes */}
-          <Box bg="white" borderRadius="xl" boxShadow="md" p={6}>
-            <Heading as="h2" size="lg" color="yellow.600" mb={2}>
-              NAICS Codes
-            </Heading>
-            <List spacing={2}>
-              {naics.map((code, i) => (
-                <ListItem key={i}>• {code}</ListItem>
-              ))}
-            </List>
-          </Box>
-        </SimpleGrid>
-
-        {/* Certifications & Licenses */}
-        <Box bg="white" borderRadius="xl" boxShadow="md" p={6} w="100%" maxW="3xl">
-          <Heading as="h2" size="lg" color="yellow.600" mb={2}>
-            Certifications & Licenses
-          </Heading>
-          <List spacing={2}>
-            {certifications.map((cert, i) => (
-              <ListItem key={i}>• {cert}</ListItem>
-            ))}
-          </List>
-        </Box>
-
-        {/* Past Performance */}
-        <Box textAlign="center" w="100%">
-          <Heading as="h2" size="md" color="yellow.600" mb={2}>
-            Past Performance
-          </Heading>
-          <Text color="gray.700">Available Upon Request</Text>
-        </Box>
-      </Stack>
-    </Container>
-  </Box>
-);
-
+      </Container>
+    </Box>
+  );
+};
 
 export default Capabilities;

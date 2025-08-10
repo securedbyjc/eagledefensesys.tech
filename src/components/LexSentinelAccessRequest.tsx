@@ -1,5 +1,7 @@
+// src/components/LexSentinelAccessRequest.tsx
 import React from "react";
-import { Box, Heading, Text, Link, useColorModeValue } from "@chakra-ui/react";
+import { Box, Heading, Text, Link } from "@chakra-ui/react";
+import { useColorModeValue } from "@chakra-ui/react";
 
 const LexSentinelAccessRequest: React.FC = () => {
   const cardBg = useColorModeValue("whiteAlpha.900", "gray.800");
@@ -21,7 +23,8 @@ const LexSentinelAccessRequest: React.FC = () => {
         Please complete the form below to request access to LexSentinel AI.<br />
         Your request will be reviewed and you will be contacted by email.
       </Text>
-      <Box as="iframe"
+      <Box
+        as="iframe"
         src="https://docs.google.com/forms/d/e/1FAIpQLSeCoNOdEV-mQZwktQbkalL686I-Kx5COvC5_uMeWGQir4LsGQ/viewform?embedded=true"
         width="100%"
         height="1274px"

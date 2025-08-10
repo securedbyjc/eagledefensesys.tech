@@ -1,18 +1,25 @@
 // src/components/Header.tsx
-import { Link as RouterLink } from "react-router-dom";
+import React from "react";
 import {
   Box,
   Flex,
   Heading,
   Image,
   IconButton,
-  useDisclosure,
   Button,
   Collapse,
+  useDisclosure,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
-import React from "react";
+import { Link as RouterLink } from "react-router-dom";
+
+const navLinks = [
+  { label: "About", to: "/about" },
+  { label: "Capabilities", to: "/capabilities" },
+  { label: "Projects", to: "/projects" },
+  { label: "Contact", to: "/contact" },
+];
 
 const Header = () => {
   const { isOpen, onToggle } = useDisclosure();
@@ -21,68 +28,66 @@ const Header = () => {
   const color = useColorModeValue("yellow.400", "yellow.300");
 
   return (
-    <Box bg={bg} color={color} py={4} px={6} boxShadow="md" as="header">
+    <Box as="header" bg={bg} color={color} py={4} px={6} boxShadow="md">
       <Flex align="center" justify="space-between">
-        <Flex as={RouterLink} to="/" align="center" gap={3} _hover={{ textDecoration: "none" }}>
+        <Flex
+          as={RouterLink}
+          to="/"
+          align="center"
+          gap={3}
+          _hover={{ textDecoration: "none" }}
+        >
           <Image src="/assets/logo-eds-black.png" alt="EDS Logo" boxSize="50px" />
           <Heading size="md" color={color} letterSpacing="wider">
             Eagle Defense Systems
           </Heading>
         </Flex>
+
+        {/* Mobile Toggle */}
         <IconButton
           aria-label={isOpen ? "Close menu" : "Open menu"}
-          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
           display={{ base: "block", md: "none" }}
           onClick={onToggle}
+          icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
           variant="ghost"
           color={color}
         />
-        <Flex
-          display={{ base: "none", md: "flex" }}
-          direction="row"
-          gap={6}
-          align="center"
-        >
-          <Button as={RouterLink} to="/about" variant="link" colorScheme="yellow">
-            About
-          </Button>
-          <Button as={RouterLink} to="/capabilities" variant="link" colorScheme="yellow">
-            Capabilities
-          </Button>
-          <Button as={RouterLink} to="/projects" variant="link" colorScheme="yellow">
-            Projects
-          </Button>
-          <Button as={RouterLink} to="/contact" variant="link" colorScheme="yellow">
-            Contact
-          </Button>
+
+        {/* Desktop Navigation */}
+        <Flex display={{ base: "none", md: "flex" }} gap={6}>
+          {navLinks.map(({ label, to }) => (
+            <Button
+              key={label}
+              as={RouterLink}
+              to={to}
+              variant="ghost"
+              colorScheme="yellow"
+              fontWeight="medium"
+            >
+              {label}
+            </Button>
+          ))}
         </Flex>
       </Flex>
-      {/* Mobile nav (collapse) */}
-      <Collapse
-        in={isOpen}
-        animateOpacity
-        children={
-          <Flex
-            direction="column"
-            gap={4}
-            mt={4}
-            display={{ md: "none" }}
-          >
-            <Button as={RouterLink} to="/about" variant="link" colorScheme="yellow" w="100%">
-              About
+
+      {/* Mobile Navigation */}
+      <Collapse in={isOpen} animateOpacity>
+        <Flex direction="column" mt={2}>
+          {navLinks.map(({ label, to }) => (
+            <Button
+              key={label}
+              as={RouterLink}
+              to={to}
+              variant="ghost"
+              colorScheme="yellow"
+              w="100%"
+              fontWeight="medium"
+            >
+              {label}
             </Button>
-            <Button as={RouterLink} to="/capabilities" variant="link" colorScheme="yellow" w="100%">
-              Capabilities
-            </Button>
-            <Button as={RouterLink} to="/projects" variant="link" colorScheme="yellow" w="100%">
-              Projects
-            </Button>
-            <Button as={RouterLink} to="/contact" variant="link" colorScheme="yellow" w="100%">
-              Contact
-            </Button>
-          </Flex>
-        }
-      />
+          ))}
+        </Flex>
+      </Collapse>
     </Box>
   );
 };
