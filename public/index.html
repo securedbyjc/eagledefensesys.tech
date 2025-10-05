@@ -1,10 +1,82 @@
-<head>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- CookieYes: prod-only, with preview-on-demand support  -->
+    <script>
+      (function () {
+        // Decide if we should enable CookieYes on this host
+        var host = window.location.hostname;
+        var isProd = /\.?eagledefensesys\.tech$/i.test(host);
+        var isVercelPreview = /\.vercel\.app$/i.test(host);
+
+        // Preview override: URL param ?cookieyes=1 OR localStorage flag
+        var params = new URLSearchParams(window.location.search);
+        var previewParam = params.get("cookieyes") === "1";
+        var previewFlag = false;
+        try { previewFlag = localStorage.getItem("ENABLE_COOKIEYES_PREVIEW") === "true"; } catch (e) {}
+
+        var allow = isProd || (isVercelPreview && (previewParam || previewFlag));
+        if (!allow) return;
+
+        // Load CookieYes once (idempotent)
+        if (document.getElementById("cookieyes")) return;
+        var s = document.createElement("script");
+        s.id = "cookieyes";
+        s.type = "text/javascript";
+        s.src = "https://cdn-cookieyes.com/client_data/2271eff932fa947b4cd62f22/script.js";
+        s.crossOrigin = "anonymous";
+        s.referrerPolicy = "no-referrer";
+        s.integrity = "sha384-ppEQgqXDyBD8ATgNIpXH2eyCGWX26Ky/7H22VMDzhAcytzXpL5OspnSoQXptVSmY";
+        document.head.appendChild(s);
+      })();
+    </script>
+    <!-- End CookieYes block -->
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Eagle Defense Systems</title>
     <link rel="icon" type="image/png" href="/logo-eds-shield.png" />
-</head>
-<body>
+
+    <!-- Basic SEO -->
+    <meta
+      name="description"
+      content="Eagle Defense Systems — AI-powered cybersecurity, compliance automation, and GovCon technology solutions."
+    />
+    <meta
+      name="keywords"
+      content="Eagle Defense Systems, cybersecurity, AI compliance, CMMC, GRC, GovCon, Zero Trust, risk management"
+    />
+    <meta name="author" content="Eagle Defense Systems LLC" />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Eagle Defense Systems" />
+    <meta
+      property="og:description"
+      content="AI-powered compliance and cybersecurity solutions for GovCon and enterprise clients."
+    />
+    <meta property="og:image" content="/logo-eds-shield.png" />
+    <meta property="og:url" content="https://www.eagledefensesys.tech" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Security meta (enforce real headers at Vercel via vercel.json) -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="no-referrer" />
+    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=()" />
+    <!-- CSP reference (apply as response header):
+      Content-Security-Policy:
+        default-src 'self';
+        script-src 'self' https://cdn-cookieyes.com;
+        style-src 'self' 'unsafe-inline';
+        img-src 'self' data: https:;
+        font-src 'self' data: https:;
+        connect-src 'self' https://api.eagledefensesys.tech;
+        frame-ancestors 'none';
+        base-uri 'self';
+        form-action 'self';
+    -->
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-</body>
+  </body>
 </html>
