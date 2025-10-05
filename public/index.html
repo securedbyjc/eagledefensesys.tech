@@ -1,13 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Start CookieYes consent banner -->
-    <script
-      id="cookieyes"
-      type="text/javascript"
-      src="https://cdn-cookieyes.com/client_data/2271eff932fa947b4cd62f22/script.js"
-    ></script>
-    <!-- End CookieYes consent banner -->
+<!-- CookieYes: static script tag so scanner can see it -->
+<script
+  id="cookieyes"
+  type="text/javascript"
+  src="https://cdn-cookieyes.com/client_data/2271eff932fa947b4cd62f22/script.js"
+  referrerpolicy="no-referrer"
+  integrity="sha384-ppEQgqXDyBD8ATgNIpXH2eyCGWX26Ky/7H22VMDzhAcytzXpL5OspnSoQXptVSmY"
+  crossorigin="anonymous"
+></script>
+
+=======
+    <!-- CookieYes: prod-only, with preview-on-demand support  -->
+    <script>
+      (function () {
+        // Decide if we should enable CookieYes on this host
+        var host = window.location.hostname;
+        var isProd = /\.?eagledefensesys\.tech$/i.test(host);
+        var isVercelPreview = /\.vercel\.app$/i.test(host);
+
+        // Preview override: URL param ?cookieyes=1 OR localStorage flag
+        var params = new URLSearchParams(window.location.search);
+        var previewParam = params.get("cookieyes") === "1";
+        var previewFlag = false;
+        try { previewFlag = localStorage.getItem("ENABLE_COOKIEYES_PREVIEW") === "true"; } catch (e) {}
+
+        var allow = isProd || (isVercelPreview && (previewParam || previewFlag));
+        if (!allow) return;
+
+        // Load CookieYes once (idempotent)
+        if (document.getElementById("cookieyes")) return;
+        var s = document.createElement("script");
+        s.id = "cookieyes";
+        s.type = "text/javascript";
+        s.src = "https://cdn-cookieyes.com/client_data/2271eff932fa947b4cd62f22/script.js";
+        s.crossOrigin = "anonymous";
+        s.referrerPolicy = "no-referrer";
+        s.integrity = "sha384-ppEQgqXDyBD8ATgNIpXH2eyCGWX26Ky/7H22VMDzhAcytzXpL5OspnSoQXptVSmY";
+        document.head.appendChild(s);
+      })();
+    </script>
+    <!-- End CookieYes block -->
+>>>>>>> hotfix/cookieyes-sri
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
