@@ -48,6 +48,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Eagle Defense Systems</title>
     <link rel="icon" type="image/png" href="/logo-eds-shield.png" />
+
+    <script>
+  (function () {
+    var isPreview = /\.vercel\.app$/i.test(location.hostname);
+    if (!isPreview) return;
+
+    var style = document.createElement('style');
+    style.textContent = [
+      /* common CookieYes containers/buttons */
+      '#cookieyes',
+      '.cky-consent-container',
+      '.cky-consent-bar',
+      '.cky-consent',
+      '.cky-btn-revisit',
+      '[class^="cky-"]'
+    ].join(',') + '{display:none!important;visibility:hidden!important;}';
+    document.head.appendChild(style);
+  })();
+</script>
+
   </head>
   <body>
     <div id="root"></div>
