@@ -1,5 +1,5 @@
 // src/pages/Projects.tsx
-import React, { ComponentType } from "react";
+import React, { ElementType } from "react";
 import {
   Box,
   Container,
@@ -15,7 +15,7 @@ import { FaCogs, FaChartLine, FaGavel } from "react-icons/fa";
 interface Project {
   title: string;
   description: string;
-  icon: ComponentType<any>;
+  icon: ElementType;          // <-- use ElementType (Chakra Icon expects this)
   github?: string;
   comingSoon?: boolean;
   accessLink?: string;
@@ -53,6 +53,7 @@ const Projects: React.FC = () => (
       <Heading as="h1" size="2xl" mb={10} textAlign="center">
         Our Technology Projects
       </Heading>
+
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={12}>
         {projects.map((project, idx) => {
           const { title, description, icon, github, comingSoon, accessLink } = project;
@@ -110,7 +111,7 @@ const Projects: React.FC = () => (
                 textDecoration: "none",
                 transform: "scale(1.04)",
                 boxShadow: "2xl",
-                bg: "yellow.900Alpha",
+                bg: "yellow.900", // keep to valid token
               }}
               borderRadius="lg"
               transition="all 0.18s cubic-bezier(.4,0,.2,1)"
@@ -146,6 +147,7 @@ const Projects: React.FC = () => (
           );
         })}
       </SimpleGrid>
+
       <Stack mt={12} align="center">
         <Text fontSize="lg" color="yellow.200">
           Want a technical walkthrough? Schedule a demo and see how EDS delivers.
