@@ -1,5 +1,5 @@
 // src/pages/About.tsx
-import React from "react";
+import React, { ElementType } from "react";
 import {
   Box,
   Heading,
@@ -65,7 +65,7 @@ const About = () => {
               {features.map((feature, idx) => (
                 <Flex key={idx} align="flex-start">
                   <Icon
-                    as={feature.icon}
+                    as={feature.icon as ElementType}
                     boxSize={8}
                     color="yellow.500"
                     mt={1}
