@@ -1,5 +1,5 @@
+// src/components/TechnologyShowcase.tsx
 import React, { ElementType } from "react";
-import { useColorModeValue } from "@chakra-ui/react";
 import {
   Box,
   Container,
@@ -8,6 +8,7 @@ import {
   Text,
   Button,
   Icon,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 import { FaLock, FaRobot, FaCogs } from "react-icons/fa";
@@ -31,7 +32,13 @@ const TechnologyShowcase: React.FC = () => {
         <Heading as="h2" size="xl" mb={8} textAlign="center" color="yellow.400">
           Why Choose Eagle Defense Systems?
         </Heading>
-        <Stack direction={{ base: "column", md: "row" }} spacing={10} pt={8} justify="center">
+
+        <Stack
+          direction={{ base: "column", md: "row" }}
+          spacing={10}
+          pt={8}
+          justify="center"
+        >
           {/* Card 1 */}
           <Stack
             align="center"
@@ -44,9 +51,12 @@ const TechnologyShowcase: React.FC = () => {
             color={cardColor}
           >
             <Icon as={FaLock as ElementType} {...iconProps} />
-            <Text fontWeight="semibold" fontSize="lg">Security-First Infrastructure</Text>
+            <Text fontWeight="semibold" fontSize="lg">
+              Security-First Infrastructure
+            </Text>
             <Text fontSize="sm" color={cardText}>
-              Architected from day one to meet CMMC, NIST 800-53, and FedRAMP controls—no bolt-on fixes required.
+              Architected from day one to meet CMMC, NIST 800-53, and FedRAMP
+              controls—no bolt-on fixes required.
             </Text>
           </Stack>
 
@@ -62,9 +72,12 @@ const TechnologyShowcase: React.FC = () => {
             color={cardColor}
           >
             <Icon as={FaRobot as ElementType} {...iconProps} />
-            <Text fontWeight="semibold" fontSize="lg">AI-Augmented Compliance</Text>
+            <Text fontWeight="semibold" fontSize="lg">
+              AI-Augmented Compliance
+            </Text>
             <Text fontSize="sm" color={cardText}>
-              Our internal platforms use AI to detect misconfigurations, map control gaps, and accelerate audit prep.
+              Our internal platforms use AI to detect misconfigurations, map
+              control gaps, and accelerate audit prep.
             </Text>
             <Button
               as={RouterLink}
@@ -93,9 +106,12 @@ const TechnologyShowcase: React.FC = () => {
             color={cardColor}
           >
             <Icon as={FaCogs as ElementType} {...iconProps} />
-            <Text fontWeight="semibold" fontSize="lg">Built to Scale with Startups & Agencies</Text>
+            <Text fontWeight="semibold" fontSize="lg">
+              Built to Scale with Startups & Agencies
+            </Text>
             <Text fontSize="sm" color={cardText}>
-              Whether it's a GovCon startup or a federal contract, we deliver hardened systems that are ready to grow.
+              Whether it's a GovCon startup or a federal contract, we deliver
+              hardened systems that are ready to grow.
             </Text>
           </Stack>
         </Stack>
@@ -105,4 +121,3 @@ const TechnologyShowcase: React.FC = () => {
 };
 
 export default TechnologyShowcase;
-
