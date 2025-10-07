@@ -15,7 +15,7 @@ import { FaCogs, FaChartLine, FaGavel } from "react-icons/fa";
 interface Project {
   title: string;
   description: string;
-  icon: ElementType;          // <-- use ElementType (Chakra Icon expects this)
+  icon: ElementType;             // <- key change
   github?: string;
   comingSoon?: boolean;
   accessLink?: string;
@@ -56,7 +56,7 @@ const Projects: React.FC = () => (
 
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={12}>
         {projects.map((project, idx) => {
-          const { title, description, icon, github, comingSoon, accessLink } = project;
+          const { title, description, icon: IconEl, github, comingSoon, accessLink } = project;
 
           const AccessLink = accessLink ? (
             <Link
@@ -87,7 +87,7 @@ const Projects: React.FC = () => (
                 height="100%"
                 position="relative"
               >
-                <Icon as={icon} boxSize={12} color="yellow.400" mb={4} />
+                <Icon as={IconEl} boxSize={12} color="yellow.400" mb={4} />
                 <Heading as="h3" size="md" mb={3} mt={2} color="yellow.300" textAlign="center">
                   {title}
                 </Heading>
@@ -111,7 +111,7 @@ const Projects: React.FC = () => (
                 textDecoration: "none",
                 transform: "scale(1.04)",
                 boxShadow: "2xl",
-                bg: "yellow.900", // keep to valid token
+                bg: "yellow.900Alpha",
               }}
               borderRadius="lg"
               transition="all 0.18s cubic-bezier(.4,0,.2,1)"
@@ -131,7 +131,7 @@ const Projects: React.FC = () => (
                 transition="all 0.18s cubic-bezier(.4,0,.2,1)"
                 _groupHover={{ bg: "gray.700" }}
               >
-                <Icon as={icon} boxSize={12} color="yellow.400" mb={4} />
+                <Icon as={IconEl} boxSize={12} color="yellow.400" mb={4} />
                 <Heading as="h3" size="md" mb={3} mt={2} color="yellow.300" textAlign="center">
                   {title}
                 </Heading>
