@@ -11,11 +11,12 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import { FaCalendarCheck, FaShieldAlt, FaTrophy } from "react-icons/fa";
+import type { IconType } from "react-icons";
 
 type Step = {
   title: string;
   desc: string;
-  icon: ElementType; // <-- key: ElementType works with Chakra Icon `as`
+  icon: IconType; // <-- store react-icons type here
 };
 
 const steps: Step[] = [
@@ -70,7 +71,8 @@ const PlanSection: React.FC = () => {
               align="flex-start"
               role="group"
             >
-              <Icon as={s.icon} boxSize={10} color="yellow.500" aria-hidden />
+              {/* Cast only at the use-site */}
+              <Icon as={s.icon as unknown as ElementType} boxSize={10} color="yellow.500" aria-hidden />
               <Heading as="h3" size="md" color={heading}>
                 {s.title}
               </Heading>
