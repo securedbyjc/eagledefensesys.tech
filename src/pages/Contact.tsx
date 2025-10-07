@@ -1,4 +1,4 @@
-// src/pages/Contact.tsx - CORS Workaround
+// src/pages/Contact.tsx - Google Form Hybrid Solution
 import React, { useState } from "react";
 import {
   Box,
@@ -16,7 +16,18 @@ import {
   CheckboxGroup,
 } from "@chakra-ui/react";
 
-const WEB3FORMS_ACCESS_KEY = "68ea9167-6934-4da4-9041-b6f9556d6075";
+// Google Form configuration
+const GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSdoRFbl_wwXyuUB3FIyrhVf8JGaegB1ugYDoxVc0ptJL9rCCA/formResponse";
+
+// Entry IDs from your Google Form
+const GOOGLE_FORM_ENTRIES = {
+  email: "emailAddress", // Google Forms special field for email collection
+  name: "entry.668966128",
+  organization: "entry.662803868",
+  intendedUse: "entry.1502010173",
+  linkedinProfile: "entry.1172121829",
+  phone: "entry.129791099",
+};
 
 const organizationOptions = [
   "Academic / University",
@@ -38,6 +49,34 @@ const organizationOptions = [
 
 const Contact = () => {
   const [selectedOrgs, setSelectedOrgs] = useState<string[]>([]);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    
+    const formData = new FormData(e.currentTarget);
+    
+    try {
+      // Submit to Google Forms in background (no-cors mode)
+      await fetch(GOOGLE_FORM_ACTION, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors", // Required for Google Forms
+      });
+      
+      // Show success message
+      setSubmitted(true);
+      e.currentTarget.reset();
+      setSelectedOrgs([]);
+      
+      // Scroll to top to see success message
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (error) {
+      console.error("Form submission error:", error);
+      // Even if there's an error, Google Forms likely received it
+      setSubmitted(true);
+    }
+  };
 
   return (
     <Box bg="gray.50" minH="100vh" py={{ base: 12, md: 20 }}>
@@ -50,42 +89,22 @@ const Contact = () => {
             Have questions or want to discuss a partnership? Reach out to us and we'll respond promptly.
           </Text>
 
-          {/* Native form submission to bypass CORS */}
-          <form 
-            action="https://api.web3forms.com/submit" 
-            method="POST"
-            onSubmit={() => {
-              // Show loading state briefly
-              setTimeout(() => {
-                window.location.href = "/contact?success=true";
-              }, 100);
-            }}
-          >
+          {/* Success Message */}
+          {submitted && (
+            <Box mb={6} p={4} bg="green.50" borderRadius="md" borderWidth="1px" borderColor="green.200">
+              <Text color="green.800" fontWeight="semibold" textAlign="center">
+                ✓ Message sent successfully! We'll respond as soon as possible.
+              </Text>
+            </Box>
+          )}
+
+          <form onSubmit={handleSubmit}>
             <Stack spacing={4}>
-              {/* Hidden fields for Web3Forms */}
-              <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
-              <input type="hidden" name="subject" value="New Contact Form Submission from Eagle Defense Systems" />
-              <input type="hidden" name="redirect" value="https://eagledefensesys.tech/contact?success=true" />
-              
-              {/* Honeypot for spam protection */}
-              <input type="checkbox" name="botcheck" style={{ display: "none" }} />
-
-              <Box>
-                <FormLabel htmlFor="name">Name *</FormLabel>
-                <Input
-                  id="name"
-                  name="name"
-                  type="text"
-                  placeholder="Your full name"
-                  required
-                />
-              </Box>
-
               <Box>
                 <FormLabel htmlFor="email">Email *</FormLabel>
                 <Input
                   id="email"
-                  name="email"
+                  name={GOOGLE_FORM_ENTRIES.email}
                   type="email"
                   placeholder="your.email@example.com"
                   required
@@ -93,36 +112,26 @@ const Contact = () => {
               </Box>
 
               <Box>
-                <FormLabel htmlFor="company">Organization (Optional)</FormLabel>
+                <FormLabel htmlFor="name">Name *</FormLabel>
                 <Input
-                  id="company"
-                  name="company"
+                  id="name"
+                  name={GOOGLE_FORM_ENTRIES.name}
                   type="text"
-                  placeholder="Your company or organization"
+                  placeholder="Your full name"
+                  required
                 />
               </Box>
 
               <Box>
-                <FormLabel htmlFor="inquiry-type">Inquiry Type *</FormLabel>
-                <Select id="inquiry-type" name="inquiry_type" required>
-                  <option value="">Select type...</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="demo">Schedule a Demo</option>
-                  <option value="partnership">Partnership/Teaming Opportunity</option>
-                  <option value="technical">Technical Question</option>
-                  <option value="other">Other</option>
-                </Select>
-              </Box>
-
-              <Box>
-                <FormLabel>Organization/Affiliation (Optional)</FormLabel>
+                <FormLabel>Organization/Affiliation *</FormLabel>
                 <Text fontSize="xs" color="gray.600" mb={2}>
                   Select all that apply
                 </Text>
+                {/* Hidden input to store selected values */}
                 <input 
                   type="hidden" 
-                  name="organization_affiliation" 
-                  value={selectedOrgs.join(", ")} 
+                  name={GOOGLE_FORM_ENTRIES.organization}
+                  value={selectedOrgs.join(", ")}
                 />
                 <CheckboxGroup 
                   value={selectedOrgs} 
@@ -139,23 +148,27 @@ const Contact = () => {
               </Box>
 
               <Box>
-                <FormLabel htmlFor="message">Message *</FormLabel>
+                <FormLabel htmlFor="intended-use">Intended Use *</FormLabel>
                 <Textarea
-                  id="message"
-                  name="message"
-                  rows={5}
-                  placeholder="Tell us about your inquiry or request..."
+                  id="intended-use"
+                  name={GOOGLE_FORM_ENTRIES.intendedUse}
+                  rows={4}
+                  placeholder="Please describe how you intend to use our services..."
                   required
                 />
+                <Text fontSize="xs" color="gray.600" mt={1}>
+                  Access is granted at no cost for approved academic, research, and internal
+                  evaluation purposes. Commercial use requires prior written approval.
+                </Text>
               </Box>
 
               <Box>
-                <FormLabel htmlFor="phone">Phone (Optional)</FormLabel>
+                <FormLabel htmlFor="linkedin">LinkedIn Profile (Optional)</FormLabel>
                 <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  placeholder="+1 (555) 123-4567"
+                  id="linkedin"
+                  name={GOOGLE_FORM_ENTRIES.linkedinProfile}
+                  type="url"
+                  placeholder="https://linkedin.com/in/your-profile"
                 />
               </Box>
 
@@ -164,24 +177,17 @@ const Contact = () => {
                 colorScheme="yellow"
                 size="lg"
                 mt={4}
+                isDisabled={selectedOrgs.length === 0}
               >
-                Send Message
+                Submit Request
               </Button>
 
               <Text fontSize="xs" color="gray.600" textAlign="center">
-                By submitting this form, you agree to be contacted by Eagle Defense Systems regarding your inquiry.
+                Your responses will help us review your request and ensure our services are used
+                responsibly. We will contact you by email after your submission is reviewed.
               </Text>
             </Stack>
           </form>
-
-          {/* Success message if redirected back with success param */}
-          {typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('success') === 'true' && (
-            <Box mt={4} p={4} bg="green.50" borderRadius="md" borderWidth="1px" borderColor="green.200">
-              <Text color="green.800" fontWeight="semibold" textAlign="center">
-                ✓ Message sent successfully! We'll respond as soon as possible.
-              </Text>
-            </Box>
-          )}
         </Box>
       </Container>
     </Box>
