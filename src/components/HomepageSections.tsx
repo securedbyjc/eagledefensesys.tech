@@ -15,11 +15,6 @@ import {
 import { CheckCircleIcon } from "@chakra-ui/icons";
 import { Link as RouterLink } from "react-router-dom";
 
-// NEW: StoryBrand sections
-import MissionSection from "./MissionSection";
-import PlanSection from "./PlanSection";
-
-// Reusable component for capability items
 const CapabilityItem = ({ children }: { children: React.ReactNode }) => (
   <ListItem>
     <ListIcon as={CheckCircleIcon} color="yellow.500" />
@@ -35,58 +30,30 @@ const HomepageSections: React.FC = () => {
 
   return (
     <Box as="main">
-      {/* --- StoryBrand additions under Hero --- */}
-      <MissionSection />
-      <PlanSection />
-
-      {/* About Section */}
-      <Box
-        as="section"
-        id="about"
-        bg={aboutBg}
-        py={{ base: 12, md: 16 }}
-        px={{ base: 4, md: 6 }}
-      >
+      {/* About (supporting section only) */}
+      <Box as="section" id="about" bg={aboutBg} py={{ base: 12, md: 16 }} px={{ base: 4, md: 6 }}>
         <Container maxW="6xl">
           <VStack spacing={6} align="start" maxW="4xl">
-            <Heading size="lg" color="red.700">
-              About Us
-            </Heading>
+            <Heading size="lg" color="red.700">About Us</Heading>
             <Text fontSize={{ base: "md", md: "lg" }} color={textColor}>
-              Eagle Defense Systems LLC is a veteran-owned cybersecurity
-              consultancy focused on helping federal and commercial clients meet
-              complex security and compliance objectives. We specialize in
-              translating cybersecurity policy into actionable operations—
-              bridging the gap between leadership vision and technical
-              implementation.
+              Eagle Defense Systems LLC is a veteran-owned cybersecurity consultancy focused on helping
+              federal and commercial clients meet complex security and compliance objectives. We
+              specialize in translating cybersecurity policy into actionable operations—bridging the gap
+              between leadership vision and technical implementation.
             </Text>
           </VStack>
         </Container>
       </Box>
 
-      {/* Capabilities Section */}
-      <Box
-        as="section"
-        id="capabilities"
-        bg={capabilitiesBg}
-        py={{ base: 12, md: 16 }}
-        px={{ base: 4, md: 6 }}
-      >
+      {/* Capabilities (supporting section only) */}
+      <Box as="section" id="capabilities" bg={capabilitiesBg} py={{ base: 12, md: 16 }} px={{ base: 4, md: 6 }}>
         <Container maxW="6xl">
           <VStack spacing={6} align="start" maxW="4xl">
-            <Heading size="lg" color="red.700">
-              Our Capabilities
-            </Heading>
+            <Heading size="lg" color="red.700">Our Capabilities</Heading>
             <List spacing={3} color={textColor}>
-              <CapabilityItem>
-                Governance, Risk &amp; Compliance (GRC)
-              </CapabilityItem>
-              <CapabilityItem>
-                Cybersecurity Auditing &amp; Controls Assessment
-              </CapabilityItem>
-              <CapabilityItem>
-                CMMC Pre-Assessment &amp; Implementation
-              </CapabilityItem>
+              <CapabilityItem>Governance, Risk &amp; Compliance (GRC)</CapabilityItem>
+              <CapabilityItem>Cybersecurity Auditing &amp; Controls Assessment</CapabilityItem>
+              <CapabilityItem>CMMC Pre-Assessment &amp; Implementation</CapabilityItem>
               <CapabilityItem>Cloud Security Architecture (Azure/GCP)</CapabilityItem>
               <CapabilityItem>Policy &amp; Procedure Development</CapabilityItem>
               <CapabilityItem>Threat Modeling &amp; Zero Trust Strategy</CapabilityItem>
@@ -95,22 +62,13 @@ const HomepageSections: React.FC = () => {
         </Container>
       </Box>
 
-      {/* Contact Section */}
-      <Box
-        as="section"
-        id="contact"
-        bg={contactBg}
-        py={{ base: 12, md: 16 }}
-        px={{ base: 4, md: 6 }}
-      >
+      {/* Contact (supporting section only) */}
+      <Box as="section" id="contact" bg={contactBg} py={{ base: 12, md: 16 }} px={{ base: 4, md: 6 }}>
         <Container maxW="6xl">
           <VStack spacing={6} align="start" maxW="4xl">
-            <Heading size="lg" color="red.700">
-              Contact Us
-            </Heading>
+            <Heading size="lg" color="red.700">Contact Us</Heading>
             <Text fontSize={{ base: "md", md: "lg" }} color={textColor}>
-              Ready to connect? Reach out to schedule a demo or speak with a
-              cybersecurity strategist.
+              Ready to connect? Reach out to schedule a demo or speak with a cybersecurity strategist.
             </Text>
             <Button
               as={RouterLink}
