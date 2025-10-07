@@ -1,76 +1,76 @@
-//src/components/MissionSection.tsx
+// src/components/MissionSection.tsx
 import React from "react";
 import {
   Box,
   Container,
   Heading,
   Text,
-  Stack,
   Button,
+  HStack,
+  VStack,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { Link as RouterLink } from "react-router-dom";
 
 const MissionSection: React.FC = () => {
-  const bg = useColorModeValue("yellow.50", "gray.900");
-  const fg = useColorModeValue("gray.800", "yellow.100");
-  const sub = useColorModeValue("gray.700", "yellow.200");
+  const bg = useColorModeValue("yellow.50", "gray.800");
+  const badgeBg = useColorModeValue("yellow.100", "gray.700");
+  const text = useColorModeValue("gray.800", "gray.100");
 
   return (
-    <Box as="section" bg={bg} py={{ base: 12, md: 16 }}>
+    <Box as="section" bg={bg} py={{ base: 10, md: 16 }}>
       <Container maxW="6xl">
-        <Stack
-          direction={{ base: "column", md: "row" }}
-          spacing={{ base: 8, md: 12 }}
-          align="center"
-          justify="space-between"
-        >
-          <Stack spacing={4} maxW={{ md: "2xl" }}>
-            <Heading size="xl" color={fg} lineHeight={1.2}>
-              Win more federal contracts — without compliance headaches
+        <HStack align="start" spacing={{ base: 6, md: 10 }} flexWrap="wrap">
+          <VStack align="start" spacing={5} flex="1" minW="280px">
+            <Heading as="h2" size="2xl" color={text} lineHeight="1.1">
+              Win more federal contracts —
+              <br /> without compliance headaches
             </Heading>
-            <Text fontSize={{ base: "md", md: "lg" }} color={sub}>
-              Small and mid-sized contractors in the Defense Industrial Base face
-              complex cybersecurity and supply-chain requirements (CMMC, DFARS,
-              NIST 800-171). EDS aligns your systems, automates evidence, and
-              keeps you audit-ready — so you can bid, win, and deliver with
-              confidence.
+            <Text fontSize="lg" color={text}>
+              Small and mid-sized contractors in the Defense Industrial Base face complex
+              cybersecurity and supply-chain requirements (CMMC, DFARS, NIST 800-171).
+              EDS aligns your systems, automates evidence, and keeps you audit-ready —
+              so you can bid, win, and deliver with confidence.
             </Text>
-            <Stack direction={{ base: "column", sm: "row" }} spacing={4} pt={2}>
-              <Button as={RouterLink} to="/contact" colorScheme="yellow">
+            <HStack spacing={4}>
+              <Button
+                as={RouterLink}
+                to="/contact"
+                colorScheme="yellow"
+                size="lg"
+                fontWeight="bold"
+              >
                 Schedule a Demo
               </Button>
               <Button
                 as={RouterLink}
                 to="/projects"
                 variant="outline"
-                colorScheme="yellow"
+                size="lg"
               >
                 See How It Works
               </Button>
-            </Stack>
-          </Stack>
+            </HStack>
+          </VStack>
 
-          {/* Optional illustration placeholder (kept simple for now) */}
           <Box
-            aria-hidden
+            flex="0 0 380px"
+            minH="120px"
+            borderRadius="xl"
             borderWidth="1px"
             borderStyle="dashed"
-            borderColor={useColorModeValue("yellow.300", "yellow.600")}
-            rounded="xl"
-            minH={{ base: 32, md: 40 }}
-            minW={{ base: "full", md: "40%" }}
-            opacity={0.7}
-            _before={{
-              content: '"CMMC • DFARS • NIST 800-171"',
-              display: "block",
-              fontWeight: 600,
-              color: useColorModeValue("yellow.700", "yellow.300"),
-              textAlign: "center",
-              py: 10,
-            }}
-          />
-        </Stack>
+            bg={badgeBg}
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
+            px={6}
+            py={8}
+          >
+            <Text fontWeight="semibold" opacity={0.9}>
+              CMMC • DFARS • NIST 800-171
+            </Text>
+          </Box>
+        </HStack>
       </Container>
     </Box>
   );
