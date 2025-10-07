@@ -5,7 +5,7 @@ import {
   Container,
   Heading,
   Text,
-  VStack,
+  SimpleGrid,
   Stack,
   Icon,
   useColorModeValue,
@@ -15,7 +15,7 @@ import { FaCalendarCheck, FaShieldAlt, FaTrophy } from "react-icons/fa";
 type Step = {
   title: string;
   desc: string;
-  icon: ElementType; // <- key: ElementType, not ComponentType or IconType
+  icon: ElementType; // <-- key: ElementType works with Chakra Icon `as`
 };
 
 const steps: Step[] = [
@@ -42,29 +42,42 @@ const steps: Step[] = [
 const PlanSection: React.FC = () => {
   const bg = useColorModeValue("white", "gray.900");
   const cardBg = useColorModeValue("gray.50", "gray.800");
-  const headingColor = useColorModeValue("red.700", "yellow.300");
-  const textColor = useColorModeValue("gray.700", "gray.100");
+  const text = useColorModeValue("gray.700", "gray.200");
+  const heading = useColorModeValue("gray.900", "gray.100");
 
   return (
-    <Box as="section" bg={bg} py={{ base: 12, md: 16 }}>
+    <Box as="section" id="plan" bg={bg} py={{ base: 12, md: 16 }}>
       <Container maxW="6xl">
-        <VStack spacing={6} align="start">
-          <Heading size="lg" color={headingColor}>
-            Your 3-Step Plan
-          </Heading>
+        <Heading
+          as="h2"
+          size="lg"
+          textAlign="center"
+          color="red.700"
+          mb={{ base: 8, md: 10 }}
+        >
+          Your 3-Step Plan
+        </Heading>
 
-          <Stack direction={{ base: "column", md: "row" }} spacing={6} w="full">
-            {steps.map(({ title, desc, icon }, i) => (
-              <Box key={i} flex="1" bg={cardBg} p={6} borderRadius="lg" boxShadow="md">
-                <Icon as={icon} boxSize={8} color="yellow.500" mb={3} />
-                <Heading as="h3" size="md" mb={2} color={headingColor}>
-                  {title}
-                </Heading>
-                <Text color={textColor}>{desc}</Text>
-              </Box>
-            ))}
-          </Stack>
-        </VStack>
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
+          {steps.map((s, i) => (
+            <Stack
+              key={i}
+              bg={cardBg}
+              borderRadius="xl"
+              boxShadow="md"
+              p={6}
+              spacing={4}
+              align="flex-start"
+              role="group"
+            >
+              <Icon as={s.icon} boxSize={10} color="yellow.500" aria-hidden />
+              <Heading as="h3" size="md" color={heading}>
+                {s.title}
+              </Heading>
+              <Text color={text}>{s.desc}</Text>
+            </Stack>
+          ))}
+        </SimpleGrid>
       </Container>
     </Box>
   );
