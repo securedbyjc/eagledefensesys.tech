@@ -19,7 +19,7 @@ import {
 
 // TODO: Get your access key from https://web3forms.com/
 // It's free - just enter your email to get the key
-const WEB3FORMS_ACCESS_KEY = "68ea9167-6934-4da4-9041-b6f9556d6075";
+const WEB3FORMS_ACCESS_KEY = "c6b3c14e-46c9-4d96-976c-aeb178884abc";
 
 const organizationOptions = [
   "Academic / University",
