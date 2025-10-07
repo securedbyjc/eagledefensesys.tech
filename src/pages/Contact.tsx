@@ -51,31 +51,9 @@ const Contact = () => {
   const [selectedOrgs, setSelectedOrgs] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    
-    const formData = new FormData(e.currentTarget);
-    
-    try {
-      // Submit to Google Forms in background (no-cors mode)
-      await fetch(GOOGLE_FORM_ACTION, {
-        method: "POST",
-        body: formData,
-        mode: "no-cors", // Required for Google Forms
-      });
-      
-      // Show success message
-      setSubmitted(true);
-      e.currentTarget.reset();
-      setSelectedOrgs([]);
-      
-      // Scroll to top to see success message
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } catch (error) {
-      console.error("Form submission error:", error);
-      // Even if there's an error, Google Forms likely received it
-      setSubmitted(true);
-    }
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    // Don't prevent default - let the browser submit naturally
+    // The form will redirect to Google's response page, then back to our success page
   };
 
   return (
@@ -98,8 +76,26 @@ const Contact = () => {
             </Box>
           )}
 
-          <form onSubmit={handleSubmit}>
-            <Stack spacing={4}>
+          {/* Use native form submission */}
+          <form 
+            action={GOOGLE_FORM_ACTION}
+            method="POST"
+            target="hidden_iframe"
+          >
+            {/* Hidden iframe to catch the response without redirecting */}
+            <iframe 
+              name="hidden_iframe" 
+              id="hidden_iframe" 
+              style={{ display: 'none' }}
+              onLoad={() => {
+                if ((document.getElementById('contact-form') as HTMLFormElement)?.submitted) {
+                  setSubmitted(true);
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+              }}
+            />
+            
+            <Stack spacing={4} id="contact-form">
               <Box>
                 <FormLabel htmlFor="email">Email *</FormLabel>
                 <Input
@@ -172,12 +168,25 @@ const Contact = () => {
                 />
               </Box>
 
+              <Box>
+                <FormLabel htmlFor="phone">Phone (Optional)</FormLabel>
+                <Input
+                  id="phone"
+                  name={GOOGLE_FORM_ENTRIES.phone}
+                  type="tel"
+                  placeholder="+1 (555) 123-4567"
+                />
+              </Box>
+
               <Button
                 type="submit"
                 colorScheme="yellow"
                 size="lg"
                 mt={4}
                 isDisabled={selectedOrgs.length === 0}
+                onClick={() => {
+                  (document.getElementById('contact-form') as any).submitted = true;
+                }}
               >
                 Submit Request
               </Button>
