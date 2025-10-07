@@ -107,19 +107,20 @@ const HomepageSections: React.FC = () => {
             <Box
               flex="0 0 380px"
               minH="120px"
-              borderRadius="xl"
-              borderWidth="1px"
-              borderStyle="dashed"
-              bg={badgeBg}
               display="flex"
               alignItems="center"
               justifyContent="center"
               px={6}
               py={8}
             >
-              <Text fontWeight="semibold" opacity={0.9}>
-                CMMC • DFARS • NIST 800-171
-              </Text>
+              <Box
+                as="img"
+                src="/assets/compliance-logos.png"
+                alt="CMMC Certification and DFARS Compliant"
+                maxH={{ base: "100px", md: "120px" }}
+                maxW="100%"
+                objectFit="contain"
+              />
             </Box>
           </HStack>
         </Container>
