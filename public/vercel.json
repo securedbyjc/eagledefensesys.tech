@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "eagledefensesys.tech" }],
+      "destination": "https://www.eagledefensesys.tech/$1",
+      "permanent": true
+    }
+  ]
+}
