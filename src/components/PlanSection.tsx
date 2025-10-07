@@ -15,7 +15,7 @@ import { FaCalendarCheck, FaShieldAlt, FaTrophy } from "react-icons/fa";
 type Step = {
   title: string;
   desc: string;
-  icon: ElementType; // <-- key fix
+  icon: ElementType; // <- key: ElementType, not ComponentType or IconType
 };
 
 const steps: Step[] = [
@@ -53,20 +53,9 @@ const PlanSection: React.FC = () => {
             Your 3-Step Plan
           </Heading>
 
-          <Stack
-            direction={{ base: "column", md: "row" }}
-            spacing={6}
-            w="full"
-          >
+          <Stack direction={{ base: "column", md: "row" }} spacing={6} w="full">
             {steps.map(({ title, desc, icon }, i) => (
-              <Box
-                key={i}
-                flex="1"
-                bg={cardBg}
-                p={6}
-                borderRadius="lg"
-                boxShadow="md"
-              >
+              <Box key={i} flex="1" bg={cardBg} p={6} borderRadius="lg" boxShadow="md">
                 <Icon as={icon} boxSize={8} color="yellow.500" mb={3} />
                 <Heading as="h3" size="md" mb={2} color={headingColor}>
                   {title}
