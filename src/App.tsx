@@ -9,8 +9,6 @@ import Footer from "./components/Footer";
 
 // Home page blocks
 import Hero from "./components/Hero";
-import MissionSection from "./components/MissionSection";
-import PlanSection from "./components/PlanSection";
 import HomepageSections from "./components/HomepageSections";
 
 // Pages
@@ -34,8 +32,6 @@ const App: React.FC = () => {
             element={
               <>
                 <Hero />
-                <MissionSection />
-                <PlanSection />
                 <HomepageSections />
               </>
             }
