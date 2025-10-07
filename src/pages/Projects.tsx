@@ -11,11 +11,12 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { FaCogs, FaChartLine, FaGavel } from "react-icons/fa";
+import type { IconType } from "react-icons";
 
 interface Project {
   title: string;
   description: string;
-  icon: ElementType;             // <- key change
+  icon: IconType;            // <-- accept react-icons type
   github?: string;
   comingSoon?: boolean;
   accessLink?: string;
@@ -53,10 +54,10 @@ const Projects: React.FC = () => (
       <Heading as="h1" size="2xl" mb={10} textAlign="center">
         Our Technology Projects
       </Heading>
-
       <SimpleGrid columns={{ base: 1, md: 3 }} spacing={12}>
         {projects.map((project, idx) => {
-          const { title, description, icon: IconEl, github, comingSoon, accessLink } = project;
+          const { title, description, icon, github, comingSoon, accessLink } =
+            project;
 
           const AccessLink = accessLink ? (
             <Link
@@ -87,7 +88,7 @@ const Projects: React.FC = () => (
                 height="100%"
                 position="relative"
               >
-                <Icon as={IconEl} boxSize={12} color="yellow.400" mb={4} />
+                <Icon as={icon as ElementType} boxSize={12} color="yellow.400" mb={4} />
                 <Heading as="h3" size="md" mb={3} mt={2} color="yellow.300" textAlign="center">
                   {title}
                 </Heading>
@@ -131,7 +132,7 @@ const Projects: React.FC = () => (
                 transition="all 0.18s cubic-bezier(.4,0,.2,1)"
                 _groupHover={{ bg: "gray.700" }}
               >
-                <Icon as={IconEl} boxSize={12} color="yellow.400" mb={4} />
+                <Icon as={icon as ElementType} boxSize={12} color="yellow.400" mb={4} />
                 <Heading as="h3" size="md" mb={3} mt={2} color="yellow.300" textAlign="center">
                   {title}
                 </Heading>
@@ -147,7 +148,6 @@ const Projects: React.FC = () => (
           );
         })}
       </SimpleGrid>
-
       <Stack mt={12} align="center">
         <Text fontSize="lg" color="yellow.200">
           Want a technical walkthrough? Schedule a demo and see how EDS delivers.
