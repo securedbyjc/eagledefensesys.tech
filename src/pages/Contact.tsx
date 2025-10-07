@@ -1,4 +1,4 @@
-// src/pages/Contact.tsx
+// src/pages/Contact.tsx - CORS Workaround
 import React, { useState } from "react";
 import {
   Box,
@@ -7,7 +7,6 @@ import {
   Textarea,
   Button,
   Stack,
-  useToast,
   FormLabel,
   Select,
   Container,
@@ -17,9 +16,7 @@ import {
   CheckboxGroup,
 } from "@chakra-ui/react";
 
-// TODO: Get your access key from https://web3forms.com/
-// It's free - just enter your email to get the key
-const WEB3FORMS_ACCESS_KEY = "c6b3c14e-46c9-4d96-976c-aeb178884abc";
+const WEB3FORMS_ACCESS_KEY = "68ea9167-6934-4da4-9041-b6f9556d6075";
 
 const organizationOptions = [
   "Academic / University",
@@ -40,62 +37,7 @@ const organizationOptions = [
 ];
 
 const Contact = () => {
-  const [submitting, setSubmitting] = useState(false);
   const [selectedOrgs, setSelectedOrgs] = useState<string[]>([]);
-  const toast = useToast();
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setSubmitting(true);
-
-    const formData = new FormData(e.currentTarget);
-    
-    // Add Web3Forms access key
-    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
-    
-    // Add selected organizations
-    formData.append("organization", selectedOrgs.join(", "));
-    
-    // Add custom subject line
-    formData.append("subject", "New Contact Form Submission from Eagle Defense Systems");
-    
-    // Optional: Redirect after submission (set to false to stay on page)
-    formData.append("redirect", "false");
-
-    try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        toast({
-          title: "Message sent successfully!",
-          description: "Thank you for reaching out. We'll respond as soon as possible.",
-          status: "success",
-          duration: 7000,
-          isClosable: true,
-        });
-        e.currentTarget.reset();
-        setSelectedOrgs([]);
-      } else {
-        throw new Error(data.message || "Form submission failed");
-      }
-    } catch (error) {
-      console.error("Form submission error:", error);
-      toast({
-        title: "Something went wrong.",
-        description: "Please try again later or email us directly at secure.eds@protonmail.com",
-        status: "error",
-        duration: 7000,
-        isClosable: true,
-      });
-    } finally {
-      setSubmitting(false);
-    }
-  };
 
   return (
     <Box bg="gray.50" minH="100vh" py={{ base: 12, md: 20 }}>
@@ -108,10 +50,25 @@ const Contact = () => {
             Have questions or want to discuss a partnership? Reach out to us and we'll respond promptly.
           </Text>
 
-          <form onSubmit={handleSubmit}>
+          {/* Native form submission to bypass CORS */}
+          <form 
+            action="https://api.web3forms.com/submit" 
+            method="POST"
+            onSubmit={() => {
+              // Show loading state briefly
+              setTimeout(() => {
+                window.location.href = "/contact?success=true";
+              }, 100);
+            }}
+          >
             <Stack spacing={4}>
-              {/* Honeypot field for spam protection (hidden from users) */}
-              <Input type="checkbox" name="botcheck" style={{ display: "none" }} />
+              {/* Hidden fields for Web3Forms */}
+              <input type="hidden" name="access_key" value={WEB3FORMS_ACCESS_KEY} />
+              <input type="hidden" name="subject" value="New Contact Form Submission from Eagle Defense Systems" />
+              <input type="hidden" name="redirect" value="https://eagledefensesys.tech/contact?success=true" />
+              
+              {/* Honeypot for spam protection */}
+              <input type="checkbox" name="botcheck" style={{ display: "none" }} />
 
               <Box>
                 <FormLabel htmlFor="name">Name *</FormLabel>
@@ -162,6 +119,11 @@ const Contact = () => {
                 <Text fontSize="xs" color="gray.600" mb={2}>
                   Select all that apply
                 </Text>
+                <input 
+                  type="hidden" 
+                  name="organization_affiliation" 
+                  value={selectedOrgs.join(", ")} 
+                />
                 <CheckboxGroup 
                   value={selectedOrgs} 
                   onChange={(values) => setSelectedOrgs(values as string[])}
@@ -200,8 +162,6 @@ const Contact = () => {
               <Button
                 type="submit"
                 colorScheme="yellow"
-                isLoading={submitting}
-                isDisabled={submitting}
                 size="lg"
                 mt={4}
               >
@@ -213,6 +173,15 @@ const Contact = () => {
               </Text>
             </Stack>
           </form>
+
+          {/* Success message if redirected back with success param */}
+          {typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('success') === 'true' && (
+            <Box mt={4} p={4} bg="green.50" borderRadius="md" borderWidth="1px" borderColor="green.200">
+              <Text color="green.800" fontWeight="semibold" textAlign="center">
+                ✓ Message sent successfully! We'll respond as soon as possible.
+              </Text>
+            </Box>
+          )}
         </Box>
       </Container>
     </Box>
