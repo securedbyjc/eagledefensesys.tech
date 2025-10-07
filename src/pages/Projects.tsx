@@ -19,7 +19,6 @@ interface Project {
   title: string;
   description: string;
   icon: IconType;
-  github?: string;
   comingSoon?: boolean;
   status?: string;
 }
@@ -117,85 +116,46 @@ const Projects: React.FC = () => (
 
       <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={8}>
         {projects.map((project, idx) => {
-          const { title, description, icon, github, comingSoon, status } = project;
+          const { title, description, icon, comingSoon, status } = project;
 
-          if (comingSoon) {
-            return (
-              <Box
-                key={idx}
-                bg="gray.800"
-                p={6}
-                borderRadius="lg"
-                boxShadow="xl"
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                minH="320px"
-                borderWidth="1px"
-                borderColor="gray.700"
-                position="relative"
-              >
-                <Icon as={icon as ElementType} boxSize={10} color="yellow.400" mb={4} />
-                <Heading as="h3" size="md" mb={3} color="yellow.300" textAlign="center">
-                  {title}
-                </Heading>
-                <Text color="gray.100" fontSize="sm" textAlign="center" mb={4}>
-                  {description}
+          return (
+            <Box
+              key={idx}
+              bg="gray.800"
+              p={6}
+              borderRadius="lg"
+              boxShadow="xl"
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+              minH="320px"
+              borderWidth="1px"
+              borderColor={comingSoon ? "gray.700" : "yellow.700"}
+              position="relative"
+            >
+              <Icon as={icon as ElementType} boxSize={10} color="yellow.400" mb={4} />
+              <Heading as="h3" size="md" mb={3} color="yellow.300" textAlign="center">
+                {title}
+              </Heading>
+              <Text color="gray.100" fontSize="sm" textAlign="center" mb={4}>
+                {description}
+              </Text>
+              {status && (
+                <Text fontSize="xs" color="yellow.500" mb={2} fontWeight="semibold">
+                  {status}
                 </Text>
+              )}
+              {comingSoon && (
                 <Text fontSize="sm" color="yellow.200" mt="auto" opacity={0.95} fontWeight="bold">
                   Coming Soon
                 </Text>
-              </Box>
-            );
-          }
-
-          return (
-            <Link
-              key={idx}
-              href={github}
-              isExternal
-              _hover={{
-                textDecoration: "none",
-                transform: "scale(1.03)",
-                boxShadow: "2xl",
-              }}
-              borderRadius="lg"
-              transition="all 0.18s cubic-bezier(.4,0,.2,1)"
-              display="block"
-              role="group"
-              aria-label={`View ${title} on GitHub`}
-            >
-              <Box
-                bg="gray.800"
-                p={6}
-                borderRadius="lg"
-                boxShadow="xl"
-                display="flex"
-                flexDirection="column"
-                alignItems="center"
-                minH="320px"
-                borderWidth="1px"
-                borderColor="gray.700"
-                transition="all 0.18s cubic-bezier(.4,0,.2,1)"
-                _groupHover={{ bg: "gray.700", borderColor: "yellow.500" }}
-              >
-                <Icon as={icon as ElementType} boxSize={10} color="yellow.400" mb={4} />
-                <Heading as="h3" size="md" mb={3} color="yellow.300" textAlign="center">
-                  {title}
-                </Heading>
-                <Text color="gray.100" fontSize="sm" textAlign="center" mb={4}>
-                  {description}
+              )}
+              {!comingSoon && (
+                <Text fontSize="sm" color="gray.400" mt="auto" fontStyle="italic">
+                  Private Repository
                 </Text>
-                {status && (
-                  <Text fontSize="xs" color="yellow.500" mb={2} fontWeight="semibold">
-                    {status}
-                  </Text>
-                )}
-                <Text fontSize="sm" color="yellow.200" mt="auto" opacity={0.85}>
-                  View on GitHub &rarr;
-                </Text>
-              </Box>
-            </Link>
+              )}
+            </Box>
           );
         })}
       </SimpleGrid>
@@ -213,11 +173,11 @@ const Projects: React.FC = () => (
           of secure, compliant, and resilient federal and commercial technology ecosystems.
         </Text>
         <Text fontSize="md" color="gray.300" mt={4}>
-          Want a technical walkthrough or partnership discussion?{" "}
+          Interested in technical demonstrations or partnership opportunities?{" "}
           <Link href="/contact" color="yellow.400" textDecoration="underline">
             Contact us
           </Link>{" "}
-          to schedule a demo.
+          to schedule a demo or discuss collaboration.
         </Text>
       </Stack>
     </Container>
