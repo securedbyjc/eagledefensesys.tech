@@ -210,7 +210,7 @@ const Capabilities = () => {
               Schedule a Technical Demo
             </Button>
             <Text fontSize="sm" color={textColor}>
-              Prefer email? <Link href="mailto:secure.eds@protonmail.com" color="yellow.500">secure.eds@protonmail.com</Link>
+              Prefer email? <Link href="mailto:secure.eds@protonmail.com" color="yellow.500">info@eagledefensesys.tech</Link>
             </Text>
           </Stack>
         </Stack>
