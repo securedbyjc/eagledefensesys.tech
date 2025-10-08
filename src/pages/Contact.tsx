@@ -147,12 +147,15 @@ const Contact = () => {
                 <Text fontSize="xs" color="gray.600" mb={2}>
                   Select all that apply
                 </Text>
-                {/* Hidden input to store selected values */}
-                <input 
-                  type="hidden" 
-                  name={GOOGLE_FORM_ENTRIES.organizationAffiliation}
-                  value={selectedOrgs.join(", ")}
-                />
+                {/* Multiple hidden inputs - one for each selected checkbox */}
+                {selectedOrgs.map((org, index) => (
+                  <input 
+                    key={index}
+                    type="hidden" 
+                    name={GOOGLE_FORM_ENTRIES.organizationAffiliation}
+                    value={org}
+                  />
+                ))}
                 <CheckboxGroup 
                   value={selectedOrgs} 
                   onChange={(values) => setSelectedOrgs(values as string[])}
