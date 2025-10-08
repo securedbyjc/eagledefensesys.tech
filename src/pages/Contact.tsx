@@ -19,11 +19,13 @@ import {
 // Google Form configuration
 const GOOGLE_FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSdoRFbl_wwXyuUB3FIyrhVf8JGaegB1ugYDoxVc0ptJL9rCCA/formResponse";
 
-// Entry IDs from your Google Form
+// Entry IDs from your Google Form (updated with all current fields)
 const GOOGLE_FORM_ENTRIES = {
-  email: "emailAddress", // Google Forms special field for email collection
+  email: "emailAddress", // Google Forms special field
   name: "entry.668966128",
-  organization: "entry.662803868",
+  organizationName: "entry.662803868", // Organization/Affiliation Name
+  rolePosition: "entry.1961593110", // Role/Position
+  organizationAffiliation: "entry.1040752316", // Organization/Affiliation checkboxes
   intendedUse: "entry.1502010173",
   linkedinProfile: "entry.1172121829",
   phone: "entry.129791099",
@@ -119,6 +121,28 @@ const Contact = () => {
               </Box>
 
               <Box>
+                <FormLabel htmlFor="organization-name">Organization/Affiliation Name *</FormLabel>
+                <Input
+                  id="organization-name"
+                  name={GOOGLE_FORM_ENTRIES.organizationName}
+                  type="text"
+                  placeholder="Your company or organization"
+                  required
+                />
+              </Box>
+
+              <Box>
+                <FormLabel htmlFor="role-position">Role/Position *</FormLabel>
+                <Input
+                  id="role-position"
+                  name={GOOGLE_FORM_ENTRIES.rolePosition}
+                  type="text"
+                  placeholder="Your role (e.g., CEO, Manager, etc.)"
+                  required
+                />
+              </Box>
+
+              <Box>
                 <FormLabel>Organization/Affiliation *</FormLabel>
                 <Text fontSize="xs" color="gray.600" mb={2}>
                   Select all that apply
@@ -126,7 +150,7 @@ const Contact = () => {
                 {/* Hidden input to store selected values */}
                 <input 
                   type="hidden" 
-                  name={GOOGLE_FORM_ENTRIES.organization}
+                  name={GOOGLE_FORM_ENTRIES.organizationAffiliation}
                   value={selectedOrgs.join(", ")}
                 />
                 <CheckboxGroup 
