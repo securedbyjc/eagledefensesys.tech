@@ -6,11 +6,9 @@ import {
   Heading,
   Stack,
   Text,
-  Button,
   Icon,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { Link as RouterLink } from "react-router-dom";
 import { FaLock, FaRobot, FaCogs } from "react-icons/fa";
 
 const iconProps = {
@@ -24,7 +22,7 @@ const cardBg = "gray.800";
 const TechnologyShowcase: React.FC = () => {
   const sectionBg = useColorModeValue("gray.900", "gray.900");
   const cardColor = useColorModeValue("yellow.400", "yellow.400");
-  const cardText = useColorModeValue("yellow.900", "yellow.100");
+  const cardText = useColorModeValue("gray.100", "gray.100"); // Changed to light gray/white
 
   return (
     <Box as="section" bg={sectionBg} color={cardColor} py={{ base: 12, md: 16 }}>
@@ -79,19 +77,6 @@ const TechnologyShowcase: React.FC = () => {
               Our internal platforms use AI to detect misconfigurations, map
               control gaps, and accelerate audit prep.
             </Text>
-            <Button
-              as={RouterLink}
-              to="/projects/swifteagle-access"
-              colorScheme="yellow"
-              variant="solid"
-              mt={4}
-              fontWeight="bold"
-              size="sm"
-              px={6}
-              width="100%"
-            >
-              Request Access to SwiftEagle-AI
-            </Button>
           </Stack>
 
           {/* Card 3 */}

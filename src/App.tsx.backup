@@ -9,7 +9,6 @@ import Footer from "./components/Footer";
 
 // Home page blocks
 import Hero from "./components/Hero";
-import TechnologyShowcase from "./components/TechnologyShowcase";
 import HomepageSections from "./components/HomepageSections";
 import CallToAction from "./components/CallToAction";
 

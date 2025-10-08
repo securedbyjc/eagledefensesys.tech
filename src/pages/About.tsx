@@ -11,7 +11,8 @@ import {
   Icon,
 } from "@chakra-ui/react";
 import { FaShieldAlt, FaRobot, FaUserShield, FaFlag } from "react-icons/fa";
-import type { IconType } from "react-icons"; // ✅ Proper icon type import
+import type { IconType } from "react-icons";
+import ExploreProjectsCTA from "../components/ExploreProjectsCTA";
 
 // Define the structure of each feature block
 interface Feature {
@@ -85,7 +86,7 @@ const About: React.FC = () => {
               {features.map((feature, idx) => (
                 <Flex key={idx} align="flex-start">
                   <Icon
-                    as={feature.icon as ElementType} // ✅ Chakra expects ElementType
+                    as={feature.icon as ElementType}
                     boxSize={8}
                     color="yellow.500"
                     mt={1}
@@ -111,17 +112,20 @@ const About: React.FC = () => {
               Why Choose Eagle Defense Systems?
             </Heading>
             <Text fontSize="lg" color="gray.800">
-              We don’t just prepare you for audits—we build your operations to{" "}
+              We don't just prepare you for audits—we build your operations to{" "}
               <strong>pass them by design</strong>.
             </Text>
             <Text color="gray.700">
-              Whether you’re a startup seeking your first federal contract or a mature
+              Whether you're a startup seeking your first federal contract or a mature
               enterprise defending your compliance posture, Eagle Defense Systems delivers
               tailored, scalable, and actionable solutions.
             </Text>
           </Stack>
         </Stack>
       </Container>
+
+      {/* CTA: Explore Projects - Added at the bottom */}
+      <ExploreProjectsCTA />
     </Box>
   );
 };
