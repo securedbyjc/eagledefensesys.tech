@@ -110,6 +110,17 @@ const Contact = () => {
               </Box>
 
               <Box>
+                <FormLabel htmlFor="name">Name *</FormLabel>
+                <Input
+                  id="name"
+                  name={GOOGLE_FORM_ENTRIES.name}
+                  type="text"
+                  placeholder="Your full name"
+                  required
+                />
+              </Box>
+
+              <Box>
                 <FormLabel htmlFor="organization-name">Organization/Affiliation Name *</FormLabel>
                 <Input
                   id="organization-name"
@@ -145,7 +156,6 @@ const Contact = () => {
                     value={org}
                   />
                 ))}
-              </Box>
                 <CheckboxGroup 
                   value={selectedOrgs} 
                   onChange={(values) => setSelectedOrgs(values as string[])}
@@ -158,6 +168,7 @@ const Contact = () => {
                     ))}
                   </VStack>
                 </CheckboxGroup>
+              </Box>
 
               <Box>
                 <FormLabel htmlFor="intended-use">Intended Use *</FormLabel>
