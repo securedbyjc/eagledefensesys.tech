@@ -1,35 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-<!-- CookieYes: static script tag so scanner can see it -->
-<script
-  id="cookieyes"
-  type="text/javascript"
-  src="https://cdn-cookieyes.com/client_data/2271eff932fa947b4cd62f22/script.js"
-  referrerpolicy="no-referrer"
-  integrity="sha384-ppEQgqXDyBD8ATgNIpXH2eyCGWX26Ky/7H22VMDzhAcytzXpL5OspnSoQXptVSmY"
-  crossorigin="anonymous"
-></script>
+    <!-- CookieYes: static script tag -->
+    <script
+      id="cookieyes"
+      type="text/javascript"
+      src="https://cdn-cookieyes.com/client_data/2271eff932fa947b4cd62f22/script.js"
+      referrerpolicy="no-referrer"
+      integrity="sha384-ppEQgqXDyBD8ATgNIpXH2eyCGWX26Ky/7H22VMDzhAcytzXpL5OspnSoQXptVSmY"
+      crossorigin="anonymous"
+    ></script>
 
-
-    <!-- CookieYes: prod-only, with preview-on-demand support  -->
+    <!-- CookieYes: prod-only, with preview-on-demand support -->
     <script>
       (function () {
-        // Decide if we should enable CookieYes on this host
         var host = window.location.hostname;
         var isProd = /\.?eagledefensesys\.tech$/i.test(host);
         var isVercelPreview = /\.vercel\.app$/i.test(host);
-
-        // Preview override: URL param ?cookieyes=1 OR localStorage flag
         var params = new URLSearchParams(window.location.search);
         var previewParam = params.get("cookieyes") === "1";
         var previewFlag = false;
         try { previewFlag = localStorage.getItem("ENABLE_COOKIEYES_PREVIEW") === "true"; } catch (e) {}
-
         var allow = isProd || (isVercelPreview && (previewParam || previewFlag));
         if (!allow) return;
-
-        // Load CookieYes once (idempotent)
         if (document.getElementById("cookieyes")) return;
         var s = document.createElement("script");
         s.id = "cookieyes";
@@ -41,36 +34,65 @@
         document.head.appendChild(s);
       })();
     </script>
-    <!-- End CookieYes block -->
 
+    <!-- Hide CookieYes on Vercel preview -->
+    <script>
+      (function () {
+        var isPreview = /\.vercel\.app$/i.test(location.hostname);
+        if (!isPreview) return;
+        var style = document.createElement('style');
+        style.textContent = [
+          '#cookieyes',
+          '.cky-consent-container',
+          '.cky-consent-bar',
+          '.cky-consent',
+          '.cky-btn-revisit',
+          '[class^="cky-"]'
+        ].join(',') + '{display:none!important;visibility:hidden!important;}';
+        document.head.appendChild(style);
+      })();
+    </script>
 
+    <!-- Basic Meta Tags -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eagle Defense Systems</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>Eagle Defense Systems | Cybersecurity & CMMC Compliance Solutions</title>
+    <meta name="title" content="Eagle Defense Systems | Cybersecurity & CMMC Compliance Solutions" />
+    <meta name="description" content="Veteran-owned cybersecurity consultancy specializing in CMMC, NIST 800-171, and FedRAMP compliance for defense contractors and federal agencies. Expert GRC services and AI-powered security solutions." />
+    <meta name="keywords" content="CMMC compliance, NIST 800-171, cybersecurity consulting, defense contractors, FedRAMP, GRC services, veteran-owned business, AI security, compliance automation" />
+    <meta name="author" content="Eagle Defense Systems, LLC" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://eagledefensesys.tech/" />
+    <meta property="og:title" content="Eagle Defense Systems | Cybersecurity & CMMC Compliance Solutions" />
+    <meta property="og:description" content="Veteran-owned cybersecurity consultancy specializing in CMMC, NIST 800-171, and FedRAMP compliance for defense contractors and federal agencies." />
+    <meta property="og:image" content="https://eagledefensesys.tech/logo-eds-shield.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://eagledefensesys.tech/" />
+    <meta property="twitter:title" content="Eagle Defense Systems | Cybersecurity & CMMC Compliance Solutions" />
+    <meta property="twitter:description" content="Veteran-owned cybersecurity consultancy specializing in CMMC, NIST 800-171, and FedRAMP compliance for defense contractors and federal agencies." />
+    <meta property="twitter:image" content="https://eagledefensesys.tech/logo-eds-shield.png" />
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/logo-eds-shield.png" />
-
-    <script>
-  (function () {
-    var isPreview = /\.vercel\.app$/i.test(location.hostname);
-    if (!isPreview) return;
-
-    var style = document.createElement('style');
-    style.textContent = [
-      /* common CookieYes containers/buttons */
-      '#cookieyes',
-      '.cky-consent-container',
-      '.cky-consent-bar',
-      '.cky-consent',
-      '.cky-btn-revisit',
-      '[class^="cky-"]'
-    ].join(',') + '{display:none!important;visibility:hidden!important;}';
-    document.head.appendChild(style);
-  })();
-</script>
-
+    <link rel="apple-touch-icon" href="/logo192.png" />
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#ECC94B" />
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://eagledefensesys.tech/" />
   </head>
   <body>
     <div id="root"></div>
   </body>
 </html>
-
